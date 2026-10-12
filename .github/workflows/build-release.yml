@@ -37,34 +37,32 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.0.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.1.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.0.apk
+          path: release_assets/multi-timer-widget-v1.0.1.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0
-          name: "Multi-Timer Widget v1.0.0"
+          tag_name: v1.0.1
+          name: "Multi-Timer Widget v1.0.1"
           body: |
-            ### 📱 Multi-Timer Widget Release v1.0.0
+            ### 📱 Multi-Timer Widget Release v1.0.1
 
-            A battery-optimized, interactive Android timer widget for your home screen.
+            **Fixes for OnePlus (OxygenOS) & Android 14/15/16 Launcher Widget Loading**
 
-            #### 🌟 Highlights
-            - **⚡ Dual Battery Strategies**: 
-              - *Battery Saver*: Native `Chronometer` rendered by SystemUI (0% extra battery drain).
-              - *High-Fi Loop*: Real-time progress bar with live percentage indicators.
-            - **📱 Scrollable Multi-Timer Home Screen Widget**: Control multiple named timers with one-tap Play, Pause, and Reset.
-            - **🔔 Exact Finish Alarms**: Background alarms with vibration, sounds, and heads-up notifications.
-            - **🔑 Signed Release Build**: Fully signed with V1 & V2 signatures for clean installation on all Android devices (Android 8.0 through Android 15).
-
+            #### 🛠️ Fixes in this release:
+            - **Fixed "Problem loading widget" error**: Removed unsupported `<ripple>` XML tags from widget RemoteViews buttons that caused OnePlus Launcher inflation to abort.
+            - **Unified Single-Type Layout**: Consolidated widget item layout into a single, bulletproof XML template with `viewTypeCount = 1` to prevent launcher view recycling errors.
+            - **Clean Framework Progress Bar**: Standardized progress bars to use framework styles that resolve across all third-party and OEM launcher themes.
+            - **Proper RemoteViews URI Hook**: Standardized adapter data URI for seamless widget provider sync.
+            
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.0.apk`** below and open it on your Android phone to install!
-          files: release_assets/multi-timer-widget-v1.0.0.apk
+            Download **`multi-timer-widget-v1.0.1.apk`** below to update or install!
+          files: release_assets/multi-timer-widget-v1.0.1.apk
           draft: false
           prerelease: false

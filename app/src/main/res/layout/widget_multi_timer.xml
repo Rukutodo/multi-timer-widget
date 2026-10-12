@@ -46,11 +46,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_strategy_bg"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
             android:text="⚡ Battery Saver"
             android:textColor="#38BDF8"
             android:textSize="10sp"
             android:textStyle="bold"
-            android:layout_marginEnd="6dp"/>
+            android:layout_marginEnd="6dp" />
 
         <!-- Quick Add Preset -->
         <ImageButton

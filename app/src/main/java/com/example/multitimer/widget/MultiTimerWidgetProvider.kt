@@ -80,7 +80,7 @@ class MultiTimerWidgetProvider : AppWidgetProvider() {
             // ListView Adapter Service Intent
             val serviceIntent = Intent(context, MultiTimerWidgetService::class.java).apply {
                 putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-                data = Uri.parse(toUri(Intent.URI_INTENT_SCHEME))
+                data = Uri.parse("widget://multitimer/list/$appWidgetId")
             }
             views.setRemoteAdapter(R.id.timer_list_view, serviceIntent)
             views.setEmptyView(R.id.timer_list_view, R.id.empty_view)

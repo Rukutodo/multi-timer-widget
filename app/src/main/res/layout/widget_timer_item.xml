@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
-    <!-- Timer Info with Progress Bar -->
+    <!-- Timer Info -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -26,7 +26,16 @@
             android:textSize="13sp"
             android:textStyle="bold" />
 
-        <!-- Formatted remaining text -->
+        <!-- Native Chronometer: Used in Battery Saver mode -->
+        <Chronometer
+            android:id="@+id/chronometer_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#38BDF8"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Dynamic text countdown: Used in High-Fi mode -->
         <TextView
             android:id="@+id/timer_text"
             android:layout_width="wrap_content"
@@ -34,28 +43,30 @@
             android:text="25:00"
             android:textColor="#38BDF8"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <!-- Dynamic Visual Progress Bar -->
         <ProgressBar
             android:id="@+id/timer_progress"
-            style="?android:attr/progressBarStyleHorizontal"
+            style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="6dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="12dp"
             android:max="100"
             android:progress="0"
-            android:progressDrawable="@drawable/progress_bar_custom" />
+            android:progressDrawable="@drawable/progress_bar_custom"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/timer_status_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="HIGH-FI LOOP"
+            android:text="READY"
             android:textColor="#94A3B8"
-            android:textSize="9sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
     <!-- Controls -->

@@ -3,6 +3,7 @@ package com.example.multitimer.widget
 import android.content.Context
 import android.content.Intent
 import android.os.SystemClock
+import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.example.multitimer.R
@@ -43,42 +44,81 @@ class MultiTimerRemoteViewsFactory(private val context: Context) :
         val timer = timers[position]
         val strategy = repository.getStrategy()
 
-        return if (strategy == BatteryStrategy.NATIVE_CHRONOMETER) {
-            buildChronometerView(timer)
-        } else {
-            buildDynamicView(timer)
-        }
-    }
-
-    private fun buildChronometerView(timer: TimerModel): RemoteViews {
-        val views = RemoteViews(context.packageName, R.layout.widget_timer_item_chronometer)
+        val views = RemoteViews(context.packageName, R.layout.widget_timer_item)
         views.setTextViewText(R.id.timer_name, timer.name)
 
-        // Setup 0% CPU Native Chronometer
-        views.setChronometerCountDown(R.id.chronometer_view, true)
+        if (strategy == BatteryStrategy.NATIVE_CHRONOMETER) {
+            // Show Chronometer, hide Text & ProgressBar
+            views.setViewVisibility(R.id.chronometer_view, View.VISIBLE)
+            views.setViewVisibility(R.id.timer_text, View.GONE)
+            views.setViewVisibility(R.id.timer_progress, View.GONE)
 
-        when (timer.state) {
-            TimerState.RUNNING -> {
-                views.setChronometer(R.id.chronometer_view, timer.endRealtimeMs, null, true)
-                views.setTextViewText(R.id.timer_status_label, "RUNNING (0% Battery)")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_pause)
+            views.setChronometerCountDown(R.id.chronometer_view, true)
+
+            when (timer.state) {
+                TimerState.RUNNING -> {
+                    views.setChronometer(R.id.chronometer_view, timer.endRealtimeMs, null, true)
+                    views.setTextViewText(R.id.timer_status_label, "RUNNING (0% Battery)")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_pause)
+                }
+                TimerState.PAUSED -> {
+                    val stoppedBase = SystemClock.elapsedRealtime() + timer.remainingMs
+                    views.setChronometer(R.id.chronometer_view, stoppedBase, null, false)
+                    views.setTextViewText(R.id.timer_status_label, "PAUSED")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+                }
+                TimerState.FINISHED -> {
+                    views.setChronometer(R.id.chronometer_view, SystemClock.elapsedRealtime(), null, false)
+                    views.setTextViewText(R.id.timer_status_label, "FINISHED")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+                }
+                TimerState.IDLE -> {
+                    val base = SystemClock.elapsedRealtime() + timer.totalDurationMs
+                    views.setChronometer(R.id.chronometer_view, base, null, false)
+                    views.setTextViewText(R.id.timer_status_label, "READY")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+                }
             }
-            TimerState.PAUSED -> {
-                val stoppedBase = SystemClock.elapsedRealtime() + timer.remainingMs
-                views.setChronometer(R.id.chronometer_view, stoppedBase, null, false)
-                views.setTextViewText(R.id.timer_status_label, "PAUSED")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+        } else {
+            // Show Text & ProgressBar, hide Chronometer
+            views.setViewVisibility(R.id.chronometer_view, View.GONE)
+            views.setViewVisibility(R.id.timer_text, View.VISIBLE)
+            views.setViewVisibility(R.id.timer_progress, View.VISIBLE)
+
+            val remainingMs = when (timer.state) {
+                TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
+                TimerState.PAUSED -> timer.remainingMs
+                TimerState.FINISHED -> 0L
+                TimerState.IDLE -> timer.totalDurationMs
             }
-            TimerState.FINISHED -> {
-                views.setChronometer(R.id.chronometer_view, SystemClock.elapsedRealtime(), null, false)
-                views.setTextViewText(R.id.timer_status_label, "FINISHED")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+
+            views.setTextViewText(R.id.timer_text, formatMillis(remainingMs))
+
+            val progress = if (timer.totalDurationMs > 0) {
+                val elapsed = (timer.totalDurationMs - remainingMs).coerceAtLeast(0L)
+                ((elapsed.toDouble() / timer.totalDurationMs) * 100).toInt().coerceIn(0, 100)
+            } else {
+                0
             }
-            TimerState.IDLE -> {
-                val base = SystemClock.elapsedRealtime() + timer.totalDurationMs
-                views.setChronometer(R.id.chronometer_view, base, null, false)
-                views.setTextViewText(R.id.timer_status_label, "READY")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+            views.setProgressBar(R.id.timer_progress, 100, progress, false)
+
+            when (timer.state) {
+                TimerState.RUNNING -> {
+                    views.setTextViewText(R.id.timer_status_label, "TICKING LOOP: $progress%")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_pause)
+                }
+                TimerState.PAUSED -> {
+                    views.setTextViewText(R.id.timer_status_label, "PAUSED AT $progress%")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+                }
+                TimerState.FINISHED -> {
+                    views.setTextViewText(R.id.timer_status_label, "COMPLETED")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+                }
+                TimerState.IDLE -> {
+                    views.setTextViewText(R.id.timer_status_label, "READY")
+                    views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
+                }
             }
         }
 
@@ -90,63 +130,6 @@ class MultiTimerRemoteViewsFactory(private val context: Context) :
         views.setOnClickFillInIntent(R.id.btn_play_pause, playPauseFillIn)
 
         // Fill-in Intent for Reset
-        val resetFillIn = Intent().apply {
-            action = WidgetActionReceiver.ACTION_RESET
-            putExtra(WidgetActionReceiver.EXTRA_TIMER_ID, timer.id)
-        }
-        views.setOnClickFillInIntent(R.id.btn_reset, resetFillIn)
-
-        return views
-    }
-
-    private fun buildDynamicView(timer: TimerModel): RemoteViews {
-        val views = RemoteViews(context.packageName, R.layout.widget_timer_item_dynamic)
-        views.setTextViewText(R.id.timer_name, timer.name)
-
-        val remainingMs = when (timer.state) {
-            TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
-            TimerState.PAUSED -> timer.remainingMs
-            TimerState.FINISHED -> 0L
-            TimerState.IDLE -> timer.totalDurationMs
-        }
-
-        // Exact formatted time string
-        views.setTextViewText(R.id.timer_text, formatMillis(remainingMs))
-
-        // Progress calculation
-        val progress = if (timer.totalDurationMs > 0) {
-            val elapsed = (timer.totalDurationMs - remainingMs).coerceAtLeast(0L)
-            ((elapsed.toDouble() / timer.totalDurationMs) * 100).toInt().coerceIn(0, 100)
-        } else {
-            0
-        }
-        views.setProgressBar(R.id.timer_progress, 100, progress, false)
-
-        when (timer.state) {
-            TimerState.RUNNING -> {
-                views.setTextViewText(R.id.timer_status_label, "TICKING LOOP: $progress%")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_pause)
-            }
-            TimerState.PAUSED -> {
-                views.setTextViewText(R.id.timer_status_label, "PAUSED AT $progress%")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
-            }
-            TimerState.FINISHED -> {
-                views.setTextViewText(R.id.timer_status_label, "COMPLETED")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
-            }
-            TimerState.IDLE -> {
-                views.setTextViewText(R.id.timer_status_label, "READY")
-                views.setImageViewResource(R.id.btn_play_pause, R.drawable.ic_play)
-            }
-        }
-
-        val playPauseFillIn = Intent().apply {
-            action = WidgetActionReceiver.ACTION_PLAY_PAUSE
-            putExtra(WidgetActionReceiver.EXTRA_TIMER_ID, timer.id)
-        }
-        views.setOnClickFillInIntent(R.id.btn_play_pause, playPauseFillIn)
-
         val resetFillIn = Intent().apply {
             action = WidgetActionReceiver.ACTION_RESET
             putExtra(WidgetActionReceiver.EXTRA_TIMER_ID, timer.id)
@@ -170,7 +153,7 @@ class MultiTimerRemoteViewsFactory(private val context: Context) :
     }
 
     override fun getLoadingView(): RemoteViews? = null
-    override fun getViewTypeCount(): Int = 2 // Supports both layouts seamlessly
+    override fun getViewTypeCount(): Int = 1 // Single unified layout prevents any view recycling crashes
     override fun getItemId(position: Int): Long = position.toLong()
     override fun hasStableIds(): Boolean = true
 }
