@@ -10,11 +10,21 @@
     app:strokeColor="@color/surface_card_stroke_bright"
     app:strokeWidth="1dp">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="18dp">
+        android:layout_height="wrap_content">
+
+        <!-- Background Fluid Liquid Wave Layer (Undulating 60fps wave when running) -->
+        <com.example.multitimer.ui.FluidWaveView
+            android:id="@+id/fluid_wave_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
 
         <!-- Top Header: Title, Sound & Status Badge -->
         <LinearLayout
@@ -140,4 +150,5 @@
         </LinearLayout>
 
     </LinearLayout>
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

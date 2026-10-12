@@ -62,14 +62,20 @@ class TimerAdapter(
 
             binding.textCountdown.text = formatMillis(remainingMs)
 
-            // Progress bar
-            val progress = if (timer.totalDurationMs > 0) {
+            // Progress bar & Fluid Wave Animation
+            val progressFraction = if (timer.totalDurationMs > 0) {
                 val elapsed = (timer.totalDurationMs - remainingMs).coerceAtLeast(0L)
-                ((elapsed.toDouble() / timer.totalDurationMs) * 100).toInt().coerceIn(0, 100)
+                (elapsed.toFloat() / timer.totalDurationMs).coerceIn(0f, 1f)
             } else {
-                0
+                0f
             }
-            binding.progressTimer.progress = progress
+            binding.progressTimer.progress = (progressFraction * 100).toInt()
+
+            // Fluid Wave Animation
+            binding.fluidWaveView.setAccentColor(timer.isYouTubeMusic)
+            binding.fluidWaveView.setProgress(progressFraction)
+            binding.fluidWaveView.setRunning(timer.state == TimerState.RUNNING)
+
 
             // Status Badge and Buttons
             when (timer.state) {

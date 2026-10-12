@@ -37,42 +37,42 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.9.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.10.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.9.apk
+          path: release_assets/multi-timer-widget-v1.0.10.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.9
-          name: "Multi-Timer Widget v1.0.9 - YouTube Music & Widget Custom Duration"
+          tag_name: v1.0.10
+          name: "Multi-Timer Widget v1.0.10 - Liquid Fluid Wave Animation Engine"
           body: |
-            ### 🎵 Multi-Timer Widget Release v1.0.9
+            ### 🌊 Multi-Timer Widget Release v1.0.10
 
-            **YouTube Music Playlist Integration + Widget Custom Duration Dialog + Zero Rounded Corners**
+            **Hardware-Accelerated Fluid Liquid Wave Animation + Obsidian Frosted Glass UI**
 
-            #### 🌟 What's New in v1.0.9:
-            - 🎵 **YouTube Music Deep Integration**:
-              - Direct launcher button to open YouTube Music directly to your playlists/library.
-              - Copy a link or share any song/playlist directly to Multi-Timer to set it as your alarm sound.
-              - Auto-detection of copied YouTube links from the clipboard.
-              - Fallback to YouTube Music search or direct URL on completion.
-            - ⏱️ **Widget Custom Duration Input**:
-              - Tapping the `+` button or empty state directly on the Home Screen widget now opens the sharp **Quick Add Dialog** (`QuickAddTimerActivity`).
-              - Enter custom Hours, Minutes, Seconds, or tap quick preset chips (1m, 5m, 10m, 15m, 25m, 30m, 45m, 60m) without navigating away from your home screen!
+            #### 🌟 What's New in v1.0.10:
+            - 🌊 **Organic Fluid Liquid Wave Animation**:
+              - When any countdown timer is running, an organic, hardware-accelerated dual-layer sinusoidal wave ripples and rises smoothly in the background of the card.
+              - The fluid surface height dynamically rises in real time as elapsed progress increases.
+              - Dual wave layers: translucent background crest and luminous foreground ripple with a hairline highlight.
+              - Context-aware tinting: subtle slate-cyan for system alarms and muted wine for YouTube Music timers.
+              - Zero battery waste when paused or idle (animators cancel automatically).
             - 📐 **Zero Rounded Corners & Obsidian Glass Aesthetic**:
-              - All components, dialogs, chips, and launcher widget cards strictly use 0dp radius.
-              - Frosted slate glass backgrounds with muted non-contrasty accent highlights.
+              - Preserved 100% strict zero-radius architectural edges across all views, dialogs, and widgets.
+            - 🎵 **YouTube Music Library & Widget Custom Time**:
+              - Direct playlist library opening, clipboard link paste, and quick custom time dialog directly from the widget surface.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.9.apk`** below to install!
-          files: release_assets/multi-timer-widget-v1.0.9.apk
+            Download **`multi-timer-widget-v1.0.10.apk`** below to install!
+          files: release_assets/multi-timer-widget-v1.0.10.apk
           draft: false
           prerelease: false
+
 

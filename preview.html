@@ -293,6 +293,66 @@
             background: rgba(25, 28, 36, 0.7);
         }
 
+        /* Fluid Liquid Wave Animation Chamber */
+        .fluid-wave-chamber {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease, height 0.3s ease;
+        }
+
+        .sharp-glass-card.running .fluid-wave-chamber {
+            opacity: 1;
+        }
+
+        .wave-svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+        }
+
+        .wave-svg.back {
+            opacity: 0.16;
+            fill: var(--accent-hint);
+            animation: fluidDriftBack 8.5s linear infinite;
+        }
+
+        .wave-svg.front {
+            opacity: 0.28;
+            fill: var(--accent-hint);
+            animation: fluidDriftFront 5s linear infinite;
+        }
+
+        .wave-svg.yt {
+            fill: #8f5a62 !important;
+        }
+
+        @keyframes fluidDriftFront {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-25%) scaleY(1.06); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes fluidDriftBack {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-25%) scaleY(0.94); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .card-header-line, .countdown-digits, .sharp-progress-track, .card-actions-strip {
+            position: relative;
+            z-index: 1;
+        }
+
+
         .card-header-line {
             display: flex;
             justify-content: space-between;
@@ -596,6 +656,15 @@
 
                 <!-- Timer Card 1 (Running) -->
                 <div class="sharp-glass-card running" id="card-1">
+                    <div class="fluid-wave-chamber" id="fluid-chamber-1" style="height: 78%;">
+                        <svg class="wave-svg back" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,40 C150,80 350,0 500,40 C650,80 850,0 1000,40 C1150,80 1200,50 1200,50 L1200,120 L0,120 Z"></path>
+                        </svg>
+                        <svg class="wave-svg front" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,60 C200,10 400,90 600,60 C800,10 1000,90 1200,60 L1200,120 L0,120 Z"></path>
+                        </svg>
+                    </div>
+
                     <div class="card-header-line">
                         <div>
                             <div class="timer-title">Deep Focus Sprint</div>
@@ -618,6 +687,15 @@
 
                 <!-- Timer Card 2 (YouTube Music) -->
                 <div class="sharp-glass-card" id="card-2">
+                    <div class="fluid-wave-chamber" id="fluid-chamber-2" style="height: 0%;">
+                        <svg class="wave-svg back yt" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,40 C150,80 350,0 500,40 C650,80 850,0 1000,40 C1150,80 1200,50 1200,50 L1200,120 L0,120 Z"></path>
+                        </svg>
+                        <svg class="wave-svg front yt" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,60 C200,10 400,90 600,60 C800,10 1000,90 1200,60 L1200,120 L0,120 Z"></path>
+                        </svg>
+                    </div>
+
                     <div class="card-header-line">
                         <div>
                             <div class="timer-title">Lo-Fi Beats Session</div>
@@ -640,6 +718,15 @@
 
                 <!-- Timer Card 3 -->
                 <div class="sharp-glass-card" id="card-3">
+                    <div class="fluid-wave-chamber" id="fluid-chamber-3" style="height: 0%;">
+                        <svg class="wave-svg back" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,40 C150,80 350,0 500,40 C650,80 850,0 1000,40 C1150,80 1200,50 1200,50 L1200,120 L0,120 Z"></path>
+                        </svg>
+                        <svg class="wave-svg front" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,60 C200,10 400,90 600,60 C800,10 1000,90 1200,60 L1200,120 L0,120 Z"></path>
+                        </svg>
+                    </div>
+
                     <div class="card-header-line">
                         <div>
                             <div class="timer-title">Espresso Extraction</div>
@@ -818,11 +905,16 @@
             const btn = document.getElementById(`btn-play-${id}`);
             const badge = document.getElementById(`badge-${id}`);
             const card = document.getElementById(`card-${id}`);
+            const chamber = document.getElementById(`fluid-chamber-${id}`);
 
             if (t.running) {
                 btn.textContent = "⏸ Pause";
                 badge.textContent = "RUNNING";
                 card.classList.add('running');
+                if (chamber) {
+                    const pct = Math.max(12, Math.round(((t.total - t.sec) / t.total) * 100));
+                    chamber.style.height = `${pct}%`;
+                }
             } else {
                 btn.textContent = "▶ Resume";
                 badge.textContent = "PAUSED";
@@ -839,6 +931,8 @@
             document.getElementById(`btn-play-${id}`).textContent = "▶ Start";
             document.getElementById(`badge-${id}`).textContent = "READY";
             document.getElementById(`card-${id}`).classList.remove('running');
+            const chamber = document.getElementById(`fluid-chamber-${id}`);
+            if (chamber) chamber.style.height = '0%';
         }
 
         setInterval(() => {
@@ -849,9 +943,15 @@
                     document.getElementById(`time-${id}`).textContent = formatTime(t.sec);
                     const pct = Math.round(((t.total - t.sec) / t.total) * 100);
                     document.getElementById(`fill-${id}`).style.width = `${pct}%`;
+                    const chamber = document.getElementById(`fluid-chamber-${id}`);
+                    if (chamber) {
+                        const fluidPct = Math.max(12, pct);
+                        chamber.style.height = `${fluidPct}%`;
+                    }
                 }
             }
         }, 1000);
+
 
         function confirmSharpApplication() {
             alert(`Confirmed! Applying the Sharp Frosted Glass UI (${palettes[selectedPalette].name}) to the Android App code.`);
