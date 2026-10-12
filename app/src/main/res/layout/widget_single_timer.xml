@@ -1,11 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/hero_widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_card_bg"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@drawable/widget_card_bg">
+
+    <!-- Fluid Liquid Wave Background Layer (Undulates and rises as timer runs) -->
+    <ImageView
+        android:id="@+id/hero_wave_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:contentDescription="Hero Widget Fluid Wave" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
 
     <!-- Top Header: Title, Sound & Switcher -->
     <LinearLayout
@@ -153,5 +165,5 @@
             android:contentDescription="Play or Pause"
             android:src="@drawable/ic_play" />
     </LinearLayout>
+</FrameLayout>
 
-</LinearLayout>

@@ -37,42 +37,42 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.11.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.12.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.11.apk
+          path: release_assets/multi-timer-widget-v1.0.12.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.11
-          name: "Multi-Timer Widget v1.0.11 - Circular Ring Progress with Glowing Circle Ending"
+          tag_name: v1.0.12
+          name: "Multi-Timer Widget v1.0.12 - Real-Time Fluid Wave Animation for Widgets"
           body: |
-            ### 🔘 Multi-Timer Widget Release v1.0.11
+            ### 🌊 Multi-Timer Widget Release v1.0.12
 
-            **Circular Progress Ring Gauge with Glowing Circle Ending Bead on Home Screen Widgets + Fluid Waves**
+            **Organic Fluid Liquid Wave Animation on Home Screen Widgets + Circular Ring Progress**
 
-            #### 🌟 What's New in v1.0.11:
-            - 🔘 **Circular Progress Ring with Glowing Circle Ending Bead on Widgets**:
-              - **Hero Single-Timer Widget**: The countdown digits are now surrounded by an anti-aliased circular progress ring (`WidgetRingRenderer`) with a prominent glowing circle indicator bead at the tip of the sweeping arc.
-              - **List Widget (Multi-Timer)**: Each active timer row features an instrument mini-dial with the sweeping arc and glowing circle bead.
-              - **Dynamic State**: The bead tracks elapsed time in real time and pulses when the timer is in the `RUNNING` state.
-              - Context-tinted with slate cyan (`#6B8FA3`) or muted berry (`#8F5A62`) for YouTube Music timers.
-            - 🌊 **Organic Fluid Liquid Wave Animation in App**:
-              - In-app timer cards feature hardware-accelerated dual sinusoidal wave animations that gently ripple and rise as timers run.
-            - 📐 **Zero Rounded Corners & Obsidian Glass Aesthetic**:
-              - Clean architectural zero-radius cards with frosted slate glass backgrounds.
-            - 🎵 **YouTube Music Library Integration & Quick Custom Duration**:
-              - Direct playlist library opening and home screen widget custom time input dialog.
+            #### 🌟 What's New in v1.0.12:
+            - 🌊 **Organic Fluid Liquid Wave Animation on Widgets**:
+              - **Dual-Sinusoidal Wave Generator**: Dynamic hardware-accelerated canvas wave rendering on home screen widgets via `WidgetWaveRenderer`.
+              - **Hero Single-Timer Widget**: Background wave chamber ripples and dynamically shifts water height with the progress of the active timer.
+              - **Multi-Timer List Widget**: Each timer row has an ambient liquid chamber that flows horizontally and rises as the timer ticks.
+              - **RemoteViews IPC Optimized**: Uses low-memory ARGB_8888 bitmap buffers (~180-240KB) strictly adhering to the Android Binder IPC limit to prevent `TransactionTooLargeException`.
+            - 🔘 **Circular Progress Ring with Glowing Ending Bead on Widgets**:
+              - Precise circular gauge with glowing endpoint bead tracking countdown progress.
+            - 📐 **Obsidian Architectural Aesthetic**:
+              - Strict zero rounded corners (`0dp`), obsidian slate glass finish (`#090A0D`, `#13141B`), and muted low-contrast accents.
+            - 🎵 **YouTube Music Deep Integration & In-Widget Custom Time Adder**:
+              - Direct picker for custom timer durations and deep-linking into YouTube Music playlists.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.11.apk`** below to install!
-          files: release_assets/multi-timer-widget-v1.0.11.apk
+            Download **`multi-timer-widget-v1.0.12.apk`** below to install!
+          files: release_assets/multi-timer-widget-v1.0.12.apk
           draft: false
           prerelease: false
 

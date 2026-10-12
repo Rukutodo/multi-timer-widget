@@ -1,12 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_root"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/widget_item_bg"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:background="@drawable/widget_item_bg">
+
+    <!-- Fluid Wave Background Layer for List Item Row -->
+    <ImageView
+        android:id="@+id/item_wave_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:contentDescription="Item Fluid Wave" />
+
+    <LinearLayout
+        android:id="@+id/item_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
 
     <!-- Circular Progress Ring with Glowing Circle Ending Bead -->
     <ImageView
@@ -109,5 +121,5 @@
             android:focusable="false"
             android:clickable="true" />
     </LinearLayout>
+</FrameLayout>
 
-</LinearLayout>

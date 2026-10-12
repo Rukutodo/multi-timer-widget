@@ -64,17 +64,33 @@ class MultiTimerRemoteViewsFactory(private val context: Context) :
             (elapsed.toFloat() / timer.totalDurationMs).coerceIn(0f, 1f)
         } else 0f
 
+        val isRunning = timer.state == TimerState.RUNNING
+
+        // Render Fluid Liquid Wave Background for List Item Row
+        val wavePhase = (SystemClock.elapsedRealtime() % 3200L) / 3200f * (2 * Math.PI).toFloat()
+        val itemWaveBitmap = WidgetWaveRenderer.drawWave(
+            context = context,
+            widthDp = 260,
+            heightDp = 64,
+            progress = progressFraction,
+            isRunning = isRunning,
+            isYouTube = timer.isYouTubeMusic,
+            phase = wavePhase
+        )
+        views.setImageViewBitmap(R.id.item_wave_bg, itemWaveBitmap)
+
         // Render Circular Progress Gauge with Glowing Circle Ending Bead
         val miniRingBitmap = WidgetRingRenderer.drawProgressRing(
             context = context,
             progress = progressFraction,
-            isRunning = timer.state == TimerState.RUNNING,
+            isRunning = isRunning,
             isYouTube = timer.isYouTubeMusic,
             sizeDp = 34,
             strokeWidthDp = 3.5f,
             beadRadiusDp = 3.5f
         )
         views.setImageViewBitmap(R.id.timer_circle_gauge, miniRingBitmap)
+
 
         if (strategy == BatteryStrategy.NATIVE_CHRONOMETER) {
             // Show Chronometer, hide Text & ProgressBar

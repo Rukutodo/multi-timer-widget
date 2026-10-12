@@ -529,7 +529,15 @@
             padding: 16px;
             margin-bottom: 16px;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
         }
+
+        .widget-top-strip, .widget-hero-circle-container, .widget-row, .widget-hero-center {
+            position: relative;
+            z-index: 1;
+        }
+
 
         .widget-top-strip {
             display: flex;
@@ -892,7 +900,18 @@
                 <!-- Hero Single-Timer Widget (3x2) -->
                 <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 6px; margin-top: 14px;">2. Hero Timer Card (3x2)</div>
                 <div class="widget-mockup">
+                    <!-- Widget Fluid Liquid Wave Background -->
+                    <div class="fluid-wave-chamber" id="widget-fluid-chamber" style="height: 78%; opacity: 1;">
+                        <svg class="wave-svg back" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,40 C150,80 350,0 500,40 C650,80 850,0 1000,40 C1150,80 1200,50 1200,50 L1200,120 L0,120 Z"></path>
+                        </svg>
+                        <svg class="wave-svg front" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                            <path d="M0,60 C200,10 400,90 600,60 C800,10 1000,90 1200,60 L1200,120 L0,120 Z"></path>
+                        </svg>
+                    </div>
+
                     <div class="widget-top-strip">
+
                         <div>
                             <div style="font-size: 13px; font-weight: 700;">Deep Focus Sprint</div>
                             <div style="font-size: 10px; color: var(--text-tertiary);">🎵 System Ambient Chime</div>
@@ -1081,10 +1100,19 @@
                             core.setAttribute('cx', cx);
                             core.setAttribute('cy', cy);
                         }
+
+                        // Animate Hero Widget Fluid Wave Chamber
+                        const widgetChamber = document.getElementById('widget-fluid-chamber');
+                        if (widgetChamber) {
+                            const fluidPct = Math.max(12, pct);
+                            widgetChamber.style.height = `${fluidPct}%`;
+                        }
+
                     }
                 }
             }
         }, 1000);
+
 
 
 

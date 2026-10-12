@@ -96,17 +96,33 @@ class SingleTimerWidgetProvider : AppWidgetProvider() {
                 (elapsed.toFloat() / timer.totalDurationMs).coerceIn(0f, 1f)
             } else 0f
 
+            val isRunning = timer.state == TimerState.RUNNING
+
+            // Render Fluid Liquid Wave Background for Hero Widget
+            val wavePhase = (SystemClock.elapsedRealtime() % 3200L) / 3200f * (2 * Math.PI).toFloat()
+            val waveBitmap = WidgetWaveRenderer.drawWave(
+                context = context,
+                widthDp = 260,
+                heightDp = 180,
+                progress = progress,
+                isRunning = isRunning,
+                isYouTube = timer.isYouTubeMusic,
+                phase = wavePhase
+            )
+            views.setImageViewBitmap(R.id.hero_wave_bg, waveBitmap)
+
             // Render Circular Progress Ring with Glowing Circle Ending Bead
             val ringBitmap = WidgetRingRenderer.drawProgressRing(
                 context = context,
                 progress = progress,
-                isRunning = timer.state == TimerState.RUNNING,
+                isRunning = isRunning,
                 isYouTube = timer.isYouTubeMusic,
                 sizeDp = 150,
                 strokeWidthDp = 5.5f,
                 beadRadiusDp = 5.5f
             )
             views.setImageViewBitmap(R.id.hero_ring_progress, ringBitmap)
+
 
             // Setup Timer Display
             if (strategy == BatteryStrategy.NATIVE_CHRONOMETER) {
