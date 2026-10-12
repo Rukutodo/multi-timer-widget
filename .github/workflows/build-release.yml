@@ -37,42 +37,44 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.10.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.11.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.10.apk
+          path: release_assets/multi-timer-widget-v1.0.11.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.10
-          name: "Multi-Timer Widget v1.0.10 - Liquid Fluid Wave Animation Engine"
+          tag_name: v1.0.11
+          name: "Multi-Timer Widget v1.0.11 - Circular Ring Progress with Glowing Circle Ending"
           body: |
-            ### 🌊 Multi-Timer Widget Release v1.0.10
+            ### 🔘 Multi-Timer Widget Release v1.0.11
 
-            **Hardware-Accelerated Fluid Liquid Wave Animation + Obsidian Frosted Glass UI**
+            **Circular Progress Ring Gauge with Glowing Circle Ending Bead on Home Screen Widgets + Fluid Waves**
 
-            #### 🌟 What's New in v1.0.10:
-            - 🌊 **Organic Fluid Liquid Wave Animation**:
-              - When any countdown timer is running, an organic, hardware-accelerated dual-layer sinusoidal wave ripples and rises smoothly in the background of the card.
-              - The fluid surface height dynamically rises in real time as elapsed progress increases.
-              - Dual wave layers: translucent background crest and luminous foreground ripple with a hairline highlight.
-              - Context-aware tinting: subtle slate-cyan for system alarms and muted wine for YouTube Music timers.
-              - Zero battery waste when paused or idle (animators cancel automatically).
+            #### 🌟 What's New in v1.0.11:
+            - 🔘 **Circular Progress Ring with Glowing Circle Ending Bead on Widgets**:
+              - **Hero Single-Timer Widget**: The countdown digits are now surrounded by an anti-aliased circular progress ring (`WidgetRingRenderer`) with a prominent glowing circle indicator bead at the tip of the sweeping arc.
+              - **List Widget (Multi-Timer)**: Each active timer row features an instrument mini-dial with the sweeping arc and glowing circle bead.
+              - **Dynamic State**: The bead tracks elapsed time in real time and pulses when the timer is in the `RUNNING` state.
+              - Context-tinted with slate cyan (`#6B8FA3`) or muted berry (`#8F5A62`) for YouTube Music timers.
+            - 🌊 **Organic Fluid Liquid Wave Animation in App**:
+              - In-app timer cards feature hardware-accelerated dual sinusoidal wave animations that gently ripple and rise as timers run.
             - 📐 **Zero Rounded Corners & Obsidian Glass Aesthetic**:
-              - Preserved 100% strict zero-radius architectural edges across all views, dialogs, and widgets.
-            - 🎵 **YouTube Music Library & Widget Custom Time**:
-              - Direct playlist library opening, clipboard link paste, and quick custom time dialog directly from the widget surface.
+              - Clean architectural zero-radius cards with frosted slate glass backgrounds.
+            - 🎵 **YouTube Music Library Integration & Quick Custom Duration**:
+              - Direct playlist library opening and home screen widget custom time input dialog.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.10.apk`** below to install!
-          files: release_assets/multi-timer-widget-v1.0.10.apk
+            Download **`multi-timer-widget-v1.0.11.apk`** below to install!
+          files: release_assets/multi-timer-widget-v1.0.11.apk
           draft: false
           prerelease: false
+
 
 

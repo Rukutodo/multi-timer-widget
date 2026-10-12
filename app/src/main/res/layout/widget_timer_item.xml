@@ -8,12 +8,22 @@
     android:orientation="horizontal"
     android:padding="10dp">
 
+    <!-- Circular Progress Ring with Glowing Circle Ending Bead -->
+    <ImageView
+        android:id="@+id/timer_circle_gauge"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="fitCenter"
+        android:contentDescription="Mini Progress Ring" />
+
     <!-- Timer Info -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
+
 
         <TextView
             android:id="@+id/timer_name"

@@ -552,8 +552,88 @@
 
         .widget-hero-center {
             text-align: center;
-            padding: 12px 0;
+            padding: 8px 0;
         }
+
+        /* Widget Circular Progress Ring & Circle Ending Bead */
+        .widget-hero-circle-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 6px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .widget-ring-svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .widget-ring-track {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 6;
+        }
+
+        .widget-ring-arc {
+            fill: none;
+            stroke: var(--accent-hint);
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-dasharray: 389.5;
+            stroke-dashoffset: 85.7;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+            transition: stroke-dashoffset 0.4s ease;
+        }
+
+        .widget-bead-halo {
+            fill: var(--accent-hint);
+            opacity: 0.35;
+            animation: widgetBeadPulse 2s ease-in-out infinite;
+        }
+
+        .widget-bead-core {
+            fill: #ffffff;
+            stroke: var(--accent-hint);
+            stroke-width: 1.5;
+        }
+
+        @keyframes widgetBeadPulse {
+            0%, 100% { r: 8px; opacity: 0.3; }
+            50% { r: 12px; opacity: 0.65; }
+        }
+
+        .widget-hero-inner {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .widget-mini-track {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.08);
+            stroke-width: 3.5;
+        }
+
+        .widget-mini-arc {
+            fill: none;
+            stroke: var(--accent-hint);
+            stroke-width: 3.5;
+            stroke-linecap: round;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .widget-mini-bead {
+            fill: #ffffff;
+            stroke: var(--accent-hint);
+            stroke-width: 1;
+        }
+
 
         /* Confirmation Box */
         .confirm-card {
@@ -773,9 +853,16 @@
                     </div>
 
                     <div class="widget-row">
-                        <div>
-                            <div style="font-size: 12px; font-weight: 600;">Deep Focus</div>
-                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: #ffffff;">24:45</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <svg width="34" height="34" viewBox="0 0 34 34">
+                                <circle cx="17" cy="17" r="13" class="widget-mini-track" />
+                                <circle cx="17" cy="17" r="13" class="widget-mini-arc" style="stroke-dasharray: 81.6; stroke-dashoffset: 18;" />
+                                <circle cx="27" cy="8" r="2.5" class="widget-mini-bead" />
+                            </svg>
+                            <div>
+                                <div style="font-size: 12px; font-weight: 600;">Deep Focus</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: #ffffff;">24:45</div>
+                            </div>
                         </div>
                         <div style="display: flex; gap: 4px;">
                             <button class="sharp-btn" style="padding: 4px 8px; font-size: 11px;">↺</button>
@@ -784,9 +871,16 @@
                     </div>
 
                     <div class="widget-row">
-                        <div>
-                            <div style="font-size: 12px; font-weight: 600;">Lo-Fi Beats</div>
-                            <div style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 600; color: var(--text-secondary);">45:00</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <svg width="34" height="34" viewBox="0 0 34 34">
+                                <circle cx="17" cy="17" r="13" class="widget-mini-track" />
+                                <circle cx="17" cy="17" r="13" class="widget-mini-arc" style="stroke-dasharray: 81.6; stroke-dashoffset: 81.6;" />
+                                <circle cx="17" cy="4" r="2" style="fill: rgba(255,255,255,0.4);" />
+                            </svg>
+                            <div>
+                                <div style="font-size: 12px; font-weight: 600;">Lo-Fi Beats</div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--text-secondary);">45:00</div>
+                            </div>
                         </div>
                         <div style="display: flex; gap: 4px;">
                             <button class="sharp-btn" style="padding: 4px 8px; font-size: 11px;">↺</button>
@@ -809,9 +903,21 @@
                         </div>
                     </div>
 
-                    <div class="widget-hero-center">
-                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 38px; font-weight: 600; color: #ffffff;">24:45</div>
-                        <div style="font-size: 9px; letter-spacing: 0.15em; color: var(--text-tertiary); margin-top: 4px;">SYSTEM NATIVE CHRONOMETER</div>
+                    <!-- Circular Progress Ring with Glowing Circle Ending Bead -->
+                    <div class="widget-hero-circle-container">
+                        <svg class="widget-ring-svg" viewBox="0 0 140 140">
+                            <!-- Track Ring -->
+                            <circle cx="70" cy="70" r="62" class="widget-ring-track" />
+                            <!-- Active Sweeping Progress Arc -->
+                            <circle cx="70" cy="70" r="62" class="widget-ring-arc" id="widget-ring-arc" />
+                            <!-- Glowing Circle Ending Bead -->
+                            <circle cx="70" cy="8" r="9" class="widget-bead-halo" id="widget-bead-halo" />
+                            <circle cx="70" cy="8" r="5" class="widget-bead-core" id="widget-bead-core" />
+                        </svg>
+                        <div class="widget-hero-inner">
+                            <div id="widget-hero-time" style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 700; color: #ffffff;">24:45</div>
+                            <div style="font-size: 9px; letter-spacing: 0.14em; color: var(--text-tertiary); margin-top: 2px;">RUNNING</div>
+                        </div>
                     </div>
 
                     <div style="display: flex; justify-content: center; gap: 6px; margin-top: 10px;">
@@ -940,7 +1046,8 @@
                 const t = timers[id];
                 if (t.running && t.sec > 0) {
                     t.sec--;
-                    document.getElementById(`time-${id}`).textContent = formatTime(t.sec);
+                    const timeStr = formatTime(t.sec);
+                    document.getElementById(`time-${id}`).textContent = timeStr;
                     const pct = Math.round(((t.total - t.sec) / t.total) * 100);
                     document.getElementById(`fill-${id}`).style.width = `${pct}%`;
                     const chamber = document.getElementById(`fluid-chamber-${id}`);
@@ -948,9 +1055,37 @@
                         const fluidPct = Math.max(12, pct);
                         chamber.style.height = `${fluidPct}%`;
                     }
+
+                    // Animate Hero Widget Circular Progress Ring & Circle Ending Bead
+                    if (id == 1) {
+                        const widgetTime = document.getElementById('widget-hero-time');
+                        if (widgetTime) widgetTime.textContent = timeStr;
+
+                        const arc = document.getElementById('widget-ring-arc');
+                        if (arc) {
+                            const circumference = 389.5;
+                            const offset = circumference * (1 - pct / 100);
+                            arc.style.strokeDashoffset = offset;
+                        }
+
+                        // Calculate Position for the Glowing Circle Ending Bead
+                        const halo = document.getElementById('widget-bead-halo');
+                        const core = document.getElementById('widget-bead-core');
+                        if (halo && core) {
+                            const angleDeg = (pct / 100 * 360) - 90;
+                            const rad = angleDeg * (Math.PI / 180);
+                            const cx = (70 + 62 * Math.cos(rad)).toFixed(2);
+                            const cy = (70 + 62 * Math.sin(rad)).toFixed(2);
+                            halo.setAttribute('cx', cx);
+                            halo.setAttribute('cy', cy);
+                            core.setAttribute('cx', cx);
+                            core.setAttribute('cy', cy);
+                        }
+                    }
                 }
             }
         }, 1000);
+
 
 
         function confirmSharpApplication() {

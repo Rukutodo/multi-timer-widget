@@ -52,11 +52,36 @@ class MultiTimerRemoteViewsFactory(private val context: Context) :
         val views = RemoteViews(context.packageName, R.layout.widget_timer_item)
         views.setTextViewText(R.id.timer_name, timer.name)
 
+        val remainingMs = when (timer.state) {
+            TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
+            TimerState.PAUSED -> timer.remainingMs
+            TimerState.FINISHED -> 0L
+            TimerState.IDLE -> timer.totalDurationMs
+        }
+
+        val progressFraction = if (timer.totalDurationMs > 0) {
+            val elapsed = (timer.totalDurationMs - remainingMs).coerceAtLeast(0L)
+            (elapsed.toFloat() / timer.totalDurationMs).coerceIn(0f, 1f)
+        } else 0f
+
+        // Render Circular Progress Gauge with Glowing Circle Ending Bead
+        val miniRingBitmap = WidgetRingRenderer.drawProgressRing(
+            context = context,
+            progress = progressFraction,
+            isRunning = timer.state == TimerState.RUNNING,
+            isYouTube = timer.isYouTubeMusic,
+            sizeDp = 34,
+            strokeWidthDp = 3.5f,
+            beadRadiusDp = 3.5f
+        )
+        views.setImageViewBitmap(R.id.timer_circle_gauge, miniRingBitmap)
+
         if (strategy == BatteryStrategy.NATIVE_CHRONOMETER) {
             // Show Chronometer, hide Text & ProgressBar
             views.setViewVisibility(R.id.chronometer_view, View.VISIBLE)
             views.setViewVisibility(R.id.timer_text, View.GONE)
             views.setViewVisibility(R.id.timer_progress, View.GONE)
+
 
             views.setChronometerCountDown(R.id.chronometer_view, true)
 

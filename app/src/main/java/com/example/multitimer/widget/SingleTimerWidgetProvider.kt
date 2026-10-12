@@ -84,6 +84,30 @@ class SingleTimerWidgetProvider : AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.hero_timer_name, appPendingIntent)
 
+            val remainingMs = when (timer.state) {
+                TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
+                TimerState.PAUSED -> timer.remainingMs
+                TimerState.FINISHED -> 0L
+                TimerState.IDLE -> timer.totalDurationMs
+            }
+
+            val progress = if (timer.totalDurationMs > 0) {
+                val elapsed = (timer.totalDurationMs - remainingMs).coerceAtLeast(0L)
+                (elapsed.toFloat() / timer.totalDurationMs).coerceIn(0f, 1f)
+            } else 0f
+
+            // Render Circular Progress Ring with Glowing Circle Ending Bead
+            val ringBitmap = WidgetRingRenderer.drawProgressRing(
+                context = context,
+                progress = progress,
+                isRunning = timer.state == TimerState.RUNNING,
+                isYouTube = timer.isYouTubeMusic,
+                sizeDp = 150,
+                strokeWidthDp = 5.5f,
+                beadRadiusDp = 5.5f
+            )
+            views.setImageViewBitmap(R.id.hero_ring_progress, ringBitmap)
+
             // Setup Timer Display
             if (strategy == BatteryStrategy.NATIVE_CHRONOMETER) {
                 views.setViewVisibility(R.id.hero_chronometer, View.VISIBLE)
@@ -117,13 +141,6 @@ class SingleTimerWidgetProvider : AppWidgetProvider() {
             } else {
                 views.setViewVisibility(R.id.hero_chronometer, View.GONE)
                 views.setViewVisibility(R.id.hero_timer_text, View.VISIBLE)
-
-                val remainingMs = when (timer.state) {
-                    TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
-                    TimerState.PAUSED -> timer.remainingMs
-                    TimerState.FINISHED -> 0L
-                    TimerState.IDLE -> timer.totalDurationMs
-                }
                 views.setTextViewText(R.id.hero_timer_text, formatMillis(remainingMs))
 
                 when (timer.state) {
@@ -145,6 +162,7 @@ class SingleTimerWidgetProvider : AppWidgetProvider() {
                     }
                 }
             }
+
 
             // Play/Pause Action
             val playIntent = Intent(context, SingleTimerWidgetProvider::class.java).apply {

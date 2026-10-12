@@ -71,43 +71,62 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="12dp" />
 
-    <!-- Center: Big Hero Countdown -->
-    <LinearLayout
+    <!-- Center: Big Hero Circular Ring Progress with Countdown Inside -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp">
 
-        <!-- Native Chronometer (Battery Saver) -->
-        <Chronometer
-            android:id="@+id/hero_chronometer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:textStyle="bold" />
+        <!-- Circular Progress Ring with Glowing Circle Ending Bead -->
+        <ImageView
+            android:id="@+id/hero_ring_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:contentDescription="Circular Progress Ring" />
 
-        <!-- Static Text countdown (High-Fi) -->
-        <TextView
-            android:id="@+id/hero_timer_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="25:00"
-            android:textColor="#FFFFFF"
-            android:textSize="36sp"
-            android:textStyle="bold"
-            android:visibility="gone" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/hero_status_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="READY"
-            android:textColor="#9496A1"
-            android:textSize="11sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+            <!-- Native Chronometer (Battery Saver) -->
+            <Chronometer
+                android:id="@+id/hero_chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+            <!-- Static Text countdown (High-Fi) -->
+            <TextView
+                android:id="@+id/hero_timer_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25:00"
+                android:textColor="#FFFFFF"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/hero_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="READY"
+                android:textColor="#9496A1"
+                android:textSize="10.5sp"
+                android:letterSpacing="0.05"
+                android:textStyle="bold"
+                android:layout_marginTop="2dp" />
+        </LinearLayout>
+    </FrameLayout>
+
 
     <!-- Bottom Controls: Big Actions -->
     <LinearLayout
