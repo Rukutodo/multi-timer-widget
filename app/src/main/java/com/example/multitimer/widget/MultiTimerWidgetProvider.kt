@@ -12,6 +12,7 @@ import com.example.multitimer.data.BatteryStrategy
 import com.example.multitimer.data.TimerRepository
 import com.example.multitimer.data.TimerState
 import com.example.multitimer.ui.MainActivity
+import com.example.multitimer.ui.QuickAddTimerActivity
 
 class MultiTimerWidgetProvider : AppWidgetProvider() {
 
@@ -65,17 +66,19 @@ class MultiTimerWidgetProvider : AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.btn_toggle_strategy, togglePendingIntent)
 
-            // Quick Add Button -> Broadcast
-            val addIntent = Intent(context, WidgetActionReceiver::class.java).apply {
-                action = WidgetActionReceiver.ACTION_ADD_QUICK
+            // Quick Add Button & Empty View -> Launch QuickAddTimerActivity Dialog
+            val addIntent = Intent(context, QuickAddTimerActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
             }
-            val addPendingIntent = PendingIntent.getBroadcast(
+            val addPendingIntent = PendingIntent.getActivity(
                 context,
                 102,
                 addIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             views.setOnClickPendingIntent(R.id.btn_widget_add, addPendingIntent)
+            views.setOnClickPendingIntent(R.id.empty_view, addPendingIntent)
+
 
             // ListView Adapter Service Intent
             val serviceIntent = Intent(context, MultiTimerWidgetService::class.java).apply {

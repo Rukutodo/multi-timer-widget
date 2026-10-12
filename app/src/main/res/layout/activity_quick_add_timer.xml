@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface_card"
+    android:orientation="vertical"
+    android:padding="22dp">
+
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_marginBottom="14dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WIDGET QUICK ACTION"
+                android:textColor="@color/primary"
+                android:textSize="10.5sp"
+                android:letterSpacing="0.14"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Add Custom Timer"
+                android:textColor="@color/text_main"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_close_dialog"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/btn_action_bg"
+            android:contentDescription="Close"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/text_muted" />
+    </LinearLayout>
+
+    <!-- Timer Name Input -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:hint="Timer Name (Optional)"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/surface_card_stroke_bright"
+        app:hintTextColor="@color/text_sub">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/quick_timer_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords"
+            android:textColor="@color/text_main"
+            android:textSize="14sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Custom Duration Inputs -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="Custom Duration"
+        android:textColor="@color/text_sub"
+        android:textSize="11.5sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="4dp"
+            android:hint="Hours"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quick_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="0"
+                android:textColor="@color/text_main"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
+            android:hint="Minutes"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quick_minutes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="15"
+                android:textColor="@color/text_main"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="4dp"
+            android:hint="Seconds"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quick_seconds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="0"
+                android:textColor="@color/text_main"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <!-- Quick Preset Chips -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/quick_chip_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_1m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_5m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_10m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_15m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_25m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25m"
+                android:textColor="@color/primary"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/primary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_30m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="30m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_45m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_q_60m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60m"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke_bright" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <!-- Sound & YouTube Music Option -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:text="Alarm Sound"
+        android:textColor="@color/text_sub"
+        android:textSize="11.5sp"
+        android:textStyle="bold" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/quick_chip_audio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/quick_audio_default"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="🔔 Default"
+            android:textColor="@color/text_main"
+            app:cornerRadius="0dp"
+            app:chipBackgroundColor="@color/surface_card_inner"
+            app:chipStrokeColor="@color/surface_card_stroke_bright" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/quick_audio_yt"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="▶️ YouTube Music"
+            android:textColor="@color/text_main"
+            app:cornerRadius="0dp"
+            app:chipBackgroundColor="@color/surface_card_inner"
+            app:chipStrokeColor="@color/surface_card_stroke_bright" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- YouTube Music Query / Link (Optional in dialog) -->
+    <LinearLayout
+        android:id="@+id/quick_yt_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_marginBottom="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/quick_btn_open_yt"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:text="▶️ Open YT Music Playlists"
+            android:textColor="@color/text_main"
+            android:textSize="11.5sp"
+            app:cornerRadius="0dp"
+            app:strokeColor="@color/surface_card_stroke_bright" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:hint="Song name or copied link"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/quick_yt_query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textUri|text"
+                android:text="Lo-Fi Beats"
+                android:textColor="@color/text_main"
+                android:textSize="13sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/quick_btn_cancel"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:text="Cancel"
+            android:textColor="@color/text_sub"
+            app:cornerRadius="0dp"
+            app:strokeColor="@color/surface_card_stroke_bright" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/quick_btn_create"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:backgroundTint="@color/surface_card_inner"
+            android:minWidth="120dp"
+            android:text="Add Timer"
+            android:textColor="@color/text_main"
+            android:textStyle="bold"
+            app:strokeColor="@color/surface_card_stroke_bright"
+            app:strokeWidth="1dp"
+            app:cornerRadius="0dp" />
+    </LinearLayout>
+
+</LinearLayout>

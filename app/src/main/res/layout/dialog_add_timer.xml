@@ -336,10 +336,51 @@
         android:orientation="vertical"
         android:visibility="gone">
 
+        <!-- Button to open YouTube Music app directly -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_open_youtube_music"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginBottom="8dp"
+            android:text="▶️ Open YouTube Music to Pick Song / Playlist"
+            android:textColor="@color/text_main"
+            android:textSize="11.5sp"
+            android:textStyle="bold"
+            app:cornerRadius="0dp"
+            app:strokeColor="@color/surface_card_stroke_bright" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Song or Playlist Link / Name:"
+                android:textColor="@color/text_sub"
+                android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_paste_youtube_link"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:text="📋 Paste Link"
+                android:textColor="@color/primary"
+                android:textSize="10.5sp"
+                app:cornerRadius="0dp"
+                app:strokeColor="@color/surface_card_stroke_bright" />
+        </LinearLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Song Name, Artist or music.youtube.com URL"
+            android:hint="Song Name or music.youtube.com URL"
             app:boxCornerRadiusBottomEnd="0dp"
             app:boxCornerRadiusBottomStart="0dp"
             app:boxCornerRadiusTopEnd="0dp"

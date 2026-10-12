@@ -37,38 +37,42 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.8.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.9.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.8.apk
+          path: release_assets/multi-timer-widget-v1.0.9.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.8
-          name: "Multi-Timer Widget v1.0.8 - Sharp Frosted Glass (Zero Radius)"
+          tag_name: v1.0.9
+          name: "Multi-Timer Widget v1.0.9 - YouTube Music & Widget Custom Duration"
           body: |
-            ### ⬛ Multi-Timer Widget Release v1.0.8 - Sharp Frosted Glass Redesign
+            ### 🎵 Multi-Timer Widget Release v1.0.9
 
-            **Zero Rounded Corners + Grayish-Black Obsidian + Subtle Muted Hints + Frosted Glass**
+            **YouTube Music Playlist Integration + Widget Custom Duration Dialog + Zero Rounded Corners**
 
-            #### 🌟 What's New in v1.0.8:
-            - 📐 **Zero Rounded Corners**:
-              - All cards, buttons, chips, dialogs, progress bars, and launcher widgets now feature razor-sharp, zero-radius architectural edges.
-            - 🖤 **Grayish-Black Obsidian Color Scheme**:
-              - Deep obsidian backgrounds (`#090A0D`), dark frosted slate cards (`#13141B`), and hairline borders (`#242632`).
-            - 🎨 **Subtle, Non-Contrasty Accents**:
-              - Replaced harsh neons with muted slate smoke (`#6B8FA3`), earthy sage (`#638573`), and warm taupe (`#947D60`).
-            - 🪟 **Sharp Frosted Glass Launcher Widgets**:
-              - Both the Multi-Timer list and Single-Timer hero widgets rendered with zero radius and clean frosted panels.
+            #### 🌟 What's New in v1.0.9:
+            - 🎵 **YouTube Music Deep Integration**:
+              - Direct launcher button to open YouTube Music directly to your playlists/library.
+              - Copy a link or share any song/playlist directly to Multi-Timer to set it as your alarm sound.
+              - Auto-detection of copied YouTube links from the clipboard.
+              - Fallback to YouTube Music search or direct URL on completion.
+            - ⏱️ **Widget Custom Duration Input**:
+              - Tapping the `+` button or empty state directly on the Home Screen widget now opens the sharp **Quick Add Dialog** (`QuickAddTimerActivity`).
+              - Enter custom Hours, Minutes, Seconds, or tap quick preset chips (1m, 5m, 10m, 15m, 25m, 30m, 45m, 60m) without navigating away from your home screen!
+            - 📐 **Zero Rounded Corners & Obsidian Glass Aesthetic**:
+              - All components, dialogs, chips, and launcher widget cards strictly use 0dp radius.
+              - Frosted slate glass backgrounds with muted non-contrasty accent highlights.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.8.apk`** below to install!
-          files: release_assets/multi-timer-widget-v1.0.8.apk
+            Download **`multi-timer-widget-v1.0.9.apk`** below to install!
+          files: release_assets/multi-timer-widget-v1.0.9.apk
           draft: false
           prerelease: false
+

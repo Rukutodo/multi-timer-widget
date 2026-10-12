@@ -83,6 +83,23 @@ class MainActivity : AppCompatActivity() {
         setupFab()
         setupDiagnostics()
         startUiUpdateLoop()
+
+        handleSharedIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleSharedIntent(intent)
+    }
+
+    private fun handleSharedIntent(intent: Intent?) {
+        if (intent?.action == Intent.ACTION_SEND && intent.type == "text/plain") {
+            val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
+            if (!sharedText.isNullOrEmpty()) {
+                showAddTimerDialog(prefilledYtLink = sharedText)
+            }
+        }
     }
 
     override fun onResume() {
@@ -183,7 +200,7 @@ class MainActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun showAddTimerDialog() {
+    private fun showAddTimerDialog(prefilledYtLink: String? = null) {
         val dialogBinding = DialogAddTimerBinding.inflate(LayoutInflater.from(this))
 
         var chosenUri: Uri? = null
@@ -240,6 +257,68 @@ class MainActivity : AppCompatActivity() {
             dialogBinding.layoutYoutubeMusic.visibility = View.VISIBLE
         }
 
+        // Open YouTube Music App Directly to Playlists/Library
+        dialogBinding.btnOpenYoutubeMusic.setOnClickListener {
+            Toast.makeText(
+                this,
+                "Opening YouTube Music! Tap 'Share' -> 'Copy link' on any song/playlist, then return here.",
+                Toast.LENGTH_LONG
+            ).show()
+
+            val ytIntent = Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://music.youtube.com/library/playlists")
+                setPackage("com.google.android.apps.youtube.music")
+            }
+
+            try {
+                startActivity(ytIntent)
+            } catch (e: Exception) {
+                val fallback = Intent(Intent.ACTION_VIEW, Uri.parse("https://music.youtube.com/library/playlists"))
+                startActivity(fallback)
+            }
+        }
+
+        // Paste Link from Clipboard
+        dialogBinding.btnPasteYoutubeLink.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+            val clip = clipboard?.primaryClip
+            if (clip != null && clip.itemCount > 0) {
+                val text = clip.getItemAt(0)?.text?.toString()?.trim()
+                if (!text.isNullOrEmpty()) {
+                    dialogBinding.editYoutubeQuery.setText(text)
+                    Toast.makeText(this, "📋 Pasted link from clipboard!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Clipboard is empty", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Clipboard is empty", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        // Check if prefilled link was passed or auto-detect from clipboard
+        if (!prefilledYtLink.isNullOrBlank()) {
+            dialogBinding.chipTypeYoutube.isChecked = true
+            dialogBinding.chipTypeSystem.isChecked = false
+            dialogBinding.cardSelectSound.visibility = View.GONE
+            dialogBinding.layoutYoutubeMusic.visibility = View.VISIBLE
+            dialogBinding.editYoutubeQuery.setText(prefilledYtLink)
+        } else {
+            // Auto-check if clipboard contains a YouTube Music URL
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as? ClipboardManager
+            val clip = clipboard?.primaryClip
+            if (clip != null && clip.itemCount > 0) {
+                val text = clip.getItemAt(0)?.text?.toString()?.trim()
+                if (text != null && (text.contains("music.youtube.com") || text.contains("youtu.be") || text.contains("youtube.com"))) {
+                    dialogBinding.chipTypeYoutube.isChecked = true
+                    dialogBinding.chipTypeSystem.isChecked = false
+                    dialogBinding.cardSelectSound.visibility = View.GONE
+                    dialogBinding.layoutYoutubeMusic.visibility = View.VISIBLE
+                    dialogBinding.editYoutubeQuery.setText(text)
+                    Toast.makeText(this, "📋 Auto-detected YouTube link from clipboard!", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         // YouTube Preset Chips
         dialogBinding.chipYtLofi.setOnClickListener {
             dialogBinding.editYoutubeQuery.setText("Lo-Fi Beats to Relax/Study to")
@@ -253,6 +332,7 @@ class MainActivity : AppCompatActivity() {
         dialogBinding.chipYtSynth.setOnClickListener {
             dialogBinding.editYoutubeQuery.setText("Synthwave Focus Cyberpunk")
         }
+
 
         // Custom Sound Picker action
         val openSoundPicker = {

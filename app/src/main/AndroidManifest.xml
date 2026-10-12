@@ -35,7 +35,20 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
         </activity>
+
+        <!-- Quick Add Dialog Activity (Launched directly from widget + button) -->
+        <activity
+            android:name=".ui.QuickAddTimerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MultiTimer.Dialog"
+            android:windowSoftInputMode="adjustResize" />
+
 
         <!-- Home Screen Widget Provider -->
         <receiver
