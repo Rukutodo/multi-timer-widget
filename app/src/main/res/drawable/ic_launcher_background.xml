@@ -3,11 +3,24 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    
+    <!-- Deep obsidian glass background -->
     <path
-        android:fillColor="#090E1A"
+        android:fillColor="#06090E"
         android:pathData="M0,0h108v108h-108z"/>
-    <!-- Subtle ambient glow circle in background -->
+
+    <!-- Subtle ambient radial mesh glow -->
     <path
-        android:fillColor="#152238"
-        android:pathData="M54,54m-42,0a42,42 0,1 1,84 0a42,42 0,1 1,-84 0"/>
+        android:fillColor="#0F1A2E"
+        android:pathData="M54,54m-46,0a46,46 0,1 1,92 0a46,46 0,1 1,-92 0"/>
+
+    <path
+        android:fillColor="#15243F"
+        android:pathData="M54,54m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0"/>
+
+    <!-- Precision subtle quadrant crosshairs -->
+    <path
+        android:strokeColor="#1E2E4A"
+        android:strokeWidth="1"
+        android:pathData="M54,12 L54,20 M54,88 L54,96 M12,54 L20,54 M88,54 L96,54"/>
 </vector>

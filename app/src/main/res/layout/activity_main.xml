@@ -17,7 +17,7 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingStart="20dp"
-            android:paddingTop="24dp"
+            android:paddingTop="20dp"
             android:paddingEnd="20dp"
             android:paddingBottom="12dp">
 
@@ -32,8 +32,8 @@
                     android:layout_height="wrap_content"
                     android:text="MULTI-TIMER"
                     android:textColor="@color/primary_neon"
-                    android:textSize="12sp"
-                    android:letterSpacing="0.15"
+                    android:textSize="11sp"
+                    android:letterSpacing="0.18"
                     android:textStyle="bold" />
 
                 <TextView
@@ -55,7 +55,61 @@
                 android:textColor="@color/primary"
                 android:textSize="11sp"
                 app:cornerRadius="19dp"
-                app:strokeColor="@color/surface_card_stroke" />
+                app:strokeColor="@color/surface_card_stroke_bright" />
+        </LinearLayout>
+
+        <!-- Executive Stat Pills Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="14dp">
+
+            <TextView
+                android:id="@+id/text_stat_active"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_strategy_bg"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:text="⚡ 0 Active"
+                android:textColor="@color/primary"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/text_stat_running"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_strategy_bg"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:text="● 0 Running"
+                android:textColor="@color/accent_glow"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/text_stat_engine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_strategy_bg"
+                android:paddingStart="10dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="4dp"
+                android:text="🔋 Native Chrono"
+                android:textColor="@color/text_sub"
+                android:textSize="11sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -71,7 +125,7 @@
             android:orientation="vertical"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            android:paddingBottom="100dp">
+            android:paddingBottom="120dp">
 
             <!-- Battery Strategy Glassmorphic Card -->
             <com.google.android.material.card.MaterialCardView
@@ -79,34 +133,52 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
                 app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="20dp"
+                app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
-                app:strokeColor="@color/surface_card_stroke"
+                app:strokeColor="@color/surface_card_stroke_bright"
                 app:strokeWidth="1.2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp">
+                    android:padding="20dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Widget Battery Strategy"
-                        android:textColor="@color/text_main"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Render &amp; Battery Engine"
+                            android:textColor="@color/text_main"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚡ 0% IDLE DRAW"
+                            android:textColor="@color/accent_glow"
+                            android:textSize="10sp"
+                            android:letterSpacing="0.08"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/strategy_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginBottom="14dp"
-                        android:text="Native Chronometer: SystemUI renders the countdown at 0% battery consumption."
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Native Chronometer: SystemUI hardware-renders countdown at 0% battery consumption."
                         android:textColor="@color/text_sub"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:lineSpacingExtra="2dp" />
 
                     <com.google.android.material.button.MaterialButtonToggleGroup
                         android:id="@+id/toggle_group_strategy"
@@ -124,7 +196,8 @@
                             android:textColor="@color/text_main"
                             android:textSize="11sp"
                             android:textStyle="bold"
-                            app:cornerRadius="22dp" />
+                            app:cornerRadius="22dp"
+                            app:strokeColor="@color/surface_card_stroke_bright" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_mode_loop"
@@ -136,21 +209,78 @@
                             android:textColor="@color/text_main"
                             android:textSize="11sp"
                             android:textStyle="bold"
-                            app:cornerRadius="22dp" />
+                            app:cornerRadius="22dp"
+                            app:strokeColor="@color/surface_card_stroke_bright" />
                     </com.google.android.material.button.MaterialButtonToggleGroup>
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Timers List Section Header -->
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="Your Timers"
-                android:textColor="@color/text_main"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:layout_marginBottom="14dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Your Active Timers"
+                    android:textColor="@color/text_main"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LIVE CARDS"
+                    android:textColor="@color/primary"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Empty State Placeholder Container -->
+            <LinearLayout
+                android:id="@+id/layout_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/widget_item_bg"
+                android:paddingTop="36dp"
+                android:paddingBottom="36dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⏱️"
+                    android:textSize="44sp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No Timers Running"
+                    android:textColor="@color/text_main"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="Tap '+ New Timer' below to create a focus block, workout sprint, or YouTube Music countdown."
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_timers"
@@ -164,14 +294,15 @@
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_timer"
         android:layout_width="wrap_content"
-        android:layout_height="52dp"
+        android:layout_height="54dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:backgroundTint="@color/primary"
+        android:backgroundTint="@color/primary_neon"
         android:text="New Timer"
         android:textColor="#06090E"
         android:textStyle="bold"
-        app:cornerRadius="26dp"
+        app:cornerRadius="27dp"
+        app:elevation="8dp"
         app:icon="@drawable/ic_add"
         app:iconTint="#06090E" />
 

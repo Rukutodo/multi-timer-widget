@@ -323,7 +323,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshList() {
-        adapter.updateData(repository.getAllTimers())
+        val allTimers = repository.getAllTimers()
+        adapter.updateData(allTimers)
+
+        if (allTimers.isEmpty()) {
+            binding.layoutEmptyState.visibility = View.VISIBLE
+            binding.recyclerTimers.visibility = View.GONE
+        } else {
+            binding.layoutEmptyState.visibility = View.GONE
+            binding.recyclerTimers.visibility = View.VISIBLE
+        }
+
+        val activeCount = allTimers.size
+        val runningCount = allTimers.count { it.state == TimerState.RUNNING }
+        binding.textStatActive.text = "⚡ $activeCount Active"
+        binding.textStatRunning.text = "● $runningCount Running"
+        val strat = repository.getStrategy()
+        binding.textStatEngine.text = if (strat == BatteryStrategy.NATIVE_CHRONOMETER) "🔋 Native Chrono" else "✨ High-Fi Loop"
     }
 
     private fun startUiUpdateLoop() {

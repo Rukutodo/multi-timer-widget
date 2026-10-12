@@ -37,46 +37,44 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.6.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.7.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.6.apk
+          path: release_assets/multi-timer-widget-v1.0.7.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.6
-          name: "Multi-Timer Widget v1.0.6"
+          tag_name: v1.0.7
+          name: "Multi-Timer Widget v1.0.7 - Modern UI Redesign"
           body: |
-            ### 📱 Multi-Timer Widget Release v1.0.6
+            ### 🎨 Multi-Timer Widget Release v1.0.7 - Modern UI Overhaul
 
-            **OnePlus Launcher Inflation Fixes + In-App Widget Diagnostics Tool + Exported RemoteViewsService**
+            **Complete 2026 Material 3 Glassmorphism Redesign + New Modern Chrono App Icon + Live Stats Bar**
 
-            #### 🛠️ Root-Cause Fixes in v1.0.6:
-            - 🛡️ **Exported `MultiTimerWidgetService` (`android:exported="true"`)**:
-              - Previously, `MultiTimerWidgetService` had `android:exported="false"`, which caused the OnePlus Launcher (`com.oneplus.launcher`) to be blocked by Android SecurityException from binding to the list adapter.
-              - Now explicitly exported with `android.permission.BIND_REMOTEVIEWS` so the launcher can freely bind and display timers.
-            - 🚫 **Eliminated Forbidden `<View>` RemoteViews Tags**:
-              - In Android, standard `<View>` tags are not permitted in `RemoteViews` layouts and trigger `InflateException: Class not allowed to be inflated in RemoteViews`.
-              - Replaced all `<View>` divider tags in both `widget_multi_timer.xml` and `widget_single_timer.xml` with fully compliant `<FrameLayout>` containers.
-            - 🔄 **Sanitized Widget Button Attributes**:
-              - Removed unsupported `android:rotation` attributes in `widget_single_timer.xml`, replacing with crisp Unicode vector pills (`◀` and `▶`).
-            - 🛠️ **Brand New In-App Widget Diagnostics Inspector**:
-              - Tap **`🛠️ Diagnostics`** in the app header to instantly test:
-                - Real-time `RemoteViews` XML inflation test on your actual device.
-                - Verification that `MultiTimerWidgetService` is properly exported.
-                - Detection of placed widgets on your home screen.
-                - One-tap **"📋 Copy Report"** and **"🔄 Force Refresh"**.
-            - ▶️ **YouTube Music Integration**:
-              - Set YouTube Music tracks/playlists as per-timer alarm sounds with full-screen heads-up notification and auto-launch.
+            #### 🌟 What's New in v1.0.7:
+            - 🎨 **Brand New 2026 Pro App Icon**:
+              - Replaced outdated styling with deep obsidian glass, dual luminous arcs (Electric Cyan `#00F0FF` & Emerald `#10B981`), and sleek floating chrono nodes.
+            - 📊 **Executive Stats Pill Bar**:
+              - Live dashboard header with active counters: `⚡ Active Timers`, `● Running Timers`, and `🔋 Current Render Engine`.
+            - 🪟 **Modern Glassmorphic Cards (24dp rounded corners)**:
+              - Elevated Obsidian cards (`#0F172A`) with luminous subtle borders (`#2E3E57`).
+              - High-contrast electric cyan 44sp countdown digits with JetBrains/Inter digital legibility.
+              - Rounded-cap gradient progress tracks (`#0284C7` to `#00F0FF`).
+            - ⏳ **Empty State Placeholder**:
+              - Engaging graphical empty state when no timers are active.
+            - 🪟 **Enhanced Add / Edit Sheet**:
+              - Added drag handle indicator pill, 16dp rounded input fields, and redesigned YouTube Music integration vibe chips.
+            - ⚡ **OxygenOS 16 / RemoteViews Compatibility**:
+              - All launcher widget layouts retain 100% RemoteViews-safe architecture.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.6.apk`** below to install or update!
-          files: release_assets/multi-timer-widget-v1.0.6.apk
+            Download **`multi-timer-widget-v1.0.7.apk`** below to install!
+          files: release_assets/multi-timer-widget-v1.0.7.apk
           draft: false
           prerelease: false

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="14dp"
+    android:layout_marginBottom="16dp"
     app:cardBackgroundColor="@color/surface_card"
-    app:cardCornerRadius="20dp"
+    app:cardCornerRadius="24dp"
     app:cardElevation="0dp"
-    app:strokeColor="@color/surface_card_stroke"
+    app:strokeColor="@color/surface_card_stroke_bright"
     app:strokeWidth="1.2dp">
 
     <LinearLayout
@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Top Header: Title & Status Badge -->
+        <!-- Top Header: Title, Sound & Status Badge -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,19 +37,20 @@
                     android:maxLines="1"
                     android:text="Work Sprint"
                     android:textColor="@color/text_main"
-                    android:textSize="17sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/text_sound_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="3dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:text="🎵 Default Alarm"
                     android:textColor="@color/primary"
-                    android:textSize="11sp" />
+                    android:textSize="11.5sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -57,23 +58,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/btn_strategy_bg"
-                android:paddingLeft="10dp"
-                android:paddingTop="3dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="3dp"
+                android:paddingStart="12dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="4dp"
                 android:text="READY"
                 android:textColor="@color/primary"
                 android:textSize="11sp"
+                android:letterSpacing="0.08"
                 android:textStyle="bold" />
 
-            <!-- Delete Icon -->
+            <!-- Delete Icon Button -->
             <ImageButton
                 android:id="@+id/btn_delete"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_marginStart="8dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:background="@drawable/btn_action_bg"
                 android:contentDescription="Delete Timer"
+                android:padding="8dp"
                 android:src="@android:drawable/ic_menu_delete"
                 app:tint="@color/text_muted" />
         </LinearLayout>
@@ -83,12 +86,12 @@
             android:id="@+id/text_countdown"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="14dp"
             android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.04"
+            android:letterSpacing="0.05"
             android:text="25:00"
             android:textColor="@color/primary_neon"
-            android:textSize="40sp"
+            android:textSize="44sp"
             android:textStyle="bold" />
 
         <!-- Sleek Progress Bar -->
@@ -96,9 +99,9 @@
             android:id="@+id/progress_timer"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="7dp"
+            android:layout_height="8dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="18dp"
             android:max="100"
             android:progress="0"
             android:progressDrawable="@drawable/progress_bar_custom" />
@@ -116,18 +119,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:layout_marginEnd="10dp"
-                android:text="Reset"
+                android:text="↺ Reset"
                 android:textColor="@color/text_sub"
+                android:textSize="12sp"
                 app:cornerRadius="22dp"
-                app:strokeColor="@color/surface_card_stroke" />
+                app:strokeColor="@color/surface_card_stroke_bright" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_item_play_pause"
                 android:layout_width="wrap_content"
                 android:layout_height="44dp"
                 android:backgroundTint="@color/primary"
+                android:minWidth="110dp"
                 android:text="Start"
                 android:textColor="#06090E"
+                android:textSize="13sp"
                 android:textStyle="bold"
                 app:cornerRadius="22dp" />
         </LinearLayout>
