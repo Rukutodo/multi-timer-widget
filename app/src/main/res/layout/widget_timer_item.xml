@@ -31,7 +31,7 @@
             android:id="@+id/chronometer_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#38BDF8"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25:00"
-            android:textColor="#38BDF8"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone" />

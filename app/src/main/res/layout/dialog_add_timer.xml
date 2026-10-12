@@ -5,25 +5,25 @@
     android:layout_height="wrap_content"
     android:background="@color/surface_card"
     android:orientation="vertical"
-    android:paddingStart="24dp"
-    android:paddingTop="16dp"
-    android:paddingEnd="24dp"
-    android:paddingBottom="24dp">
+    android:paddingStart="22dp"
+    android:paddingTop="18dp"
+    android:paddingEnd="22dp"
+    android:paddingBottom="22dp">
 
-    <!-- Top Drag Handle Pill -->
+    <!-- Top Drag Handle (Zero Radius Sharp Bar) -->
     <FrameLayout
-        android:layout_width="40dp"
-        android:layout_height="4dp"
+        android:layout_width="32dp"
+        android:layout_height="2dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp"
-        android:background="@drawable/btn_strategy_bg" />
+        android:layout_marginBottom="16dp"
+        android:background="@color/surface_card_stroke_bright" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CREATE TIMER"
-        android:textColor="@color/primary_neon"
-        android:textSize="11sp"
+        android:textColor="@color/primary"
+        android:textSize="10.5sp"
         android:letterSpacing="0.14"
         android:textStyle="bold" />
 
@@ -31,23 +31,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:layout_marginBottom="18dp"
+        android:layout_marginBottom="16dp"
         android:text="New Countdown"
         android:textColor="@color/text_main"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <!-- Timer Name -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="14dp"
         android:hint="Timer Name (e.g. Focus Sprint)"
-        app:boxCornerRadiusBottomEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxStrokeColor="@color/primary"
+        app:boxCornerRadiusBottomEnd="0dp"
+        app:boxCornerRadiusBottomStart="0dp"
+        app:boxCornerRadiusTopEnd="0dp"
+        app:boxCornerRadiusTopStart="0dp"
+        app:boxStrokeColor="@color/surface_card_stroke_bright"
         app:hintTextColor="@color/primary">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -62,17 +62,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="6dp"
         android:text="Quick Presets"
         android:textColor="@color/text_sub"
-        android:textSize="12sp"
+        android:textSize="11.5sp"
         android:textStyle="bold" />
 
     <!-- Quick Presets -->
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="14dp"
         android:scrollbars="none">
 
         <com.google.android.material.chip.ChipGroup
@@ -88,6 +88,7 @@
                 android:layout_height="wrap_content"
                 android:text="1 min"
                 android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
                 app:chipBackgroundColor="@color/surface_card_inner"
                 app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -98,6 +99,7 @@
                 android:layout_height="wrap_content"
                 android:text="5 min"
                 android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
                 app:chipBackgroundColor="@color/surface_card_inner"
                 app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -108,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="15 min"
                 android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
                 app:chipBackgroundColor="@color/surface_card_inner"
                 app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -116,8 +119,9 @@
                 style="@style/Widget.Material3.Chip.Suggestion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25 min (Focus)"
-                android:textColor="@color/primary_neon"
+                android:text="25 min"
+                android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
                 app:chipBackgroundColor="@color/surface_card_inner"
                 app:chipStrokeColor="@color/primary" />
 
@@ -128,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:text="45 min"
                 android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
                 app:chipBackgroundColor="@color/surface_card_inner"
                 app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -138,6 +143,7 @@
                 android:layout_height="wrap_content"
                 android:text="60 min"
                 android:textColor="@color/text_main"
+                app:cornerRadius="0dp"
                 app:chipBackgroundColor="@color/surface_card_inner"
                 app:chipStrokeColor="@color/surface_card_stroke_bright" />
         </com.google.android.material.chip.ChipGroup>
@@ -154,12 +160,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="6dp"
+            android:layout_marginEnd="4dp"
             android:hint="Hours"
-            app:boxCornerRadiusBottomEnd="14dp"
-            app:boxCornerRadiusBottomStart="14dp"
-            app:boxCornerRadiusTopEnd="14dp"
-            app:boxCornerRadiusTopStart="14dp">
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_hours"
@@ -175,13 +181,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="3dp"
-            android:layout_marginEnd="3dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginEnd="2dp"
             android:hint="Minutes"
-            app:boxCornerRadiusBottomEnd="14dp"
-            app:boxCornerRadiusBottomStart="14dp"
-            app:boxCornerRadiusTopEnd="14dp"
-            app:boxCornerRadiusTopStart="14dp">
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_minutes"
@@ -197,12 +203,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="6dp"
+            android:layout_marginStart="4dp"
             android:hint="Seconds"
-            app:boxCornerRadiusBottomEnd="14dp"
-            app:boxCornerRadiusBottomStart="14dp"
-            app:boxCornerRadiusTopEnd="14dp"
-            app:boxCornerRadiusTopStart="14dp">
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_seconds"
@@ -219,11 +225,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="6dp"
         android:text="Alarm Sound &amp; Music"
         android:textColor="@color/text_sub"
-        android:textSize="12sp"
+        android:textSize="11.5sp"
         android:textStyle="bold" />
 
     <!-- Audio Type Selector: System vs YouTube Music -->
@@ -231,7 +237,7 @@
         android:id="@+id/chip_group_audio_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="10dp"
         app:singleSelection="true">
 
         <com.google.android.material.chip.Chip
@@ -242,8 +248,9 @@
             android:checked="true"
             android:text="🔔 System / File"
             android:textColor="@color/text_main"
+            app:cornerRadius="0dp"
             app:chipBackgroundColor="@color/surface_card_inner"
-            app:chipStrokeColor="@color/primary" />
+            app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_type_youtube"
@@ -253,6 +260,7 @@
             android:checked="false"
             android:text="▶️ YouTube Music"
             android:textColor="@color/text_main"
+            app:cornerRadius="0dp"
             app:chipBackgroundColor="@color/surface_card_inner"
             app:chipStrokeColor="@color/surface_card_stroke_bright" />
     </com.google.android.material.chip.ChipGroup>
@@ -263,7 +271,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/surface_card_inner"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
         app:strokeColor="@color/surface_card_stroke_bright"
         app:strokeWidth="1dp">
@@ -273,14 +281,14 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="14dp">
+            android:padding="12dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🎵"
-                android:textSize="22sp"
-                android:layout_marginEnd="12dp" />
+                android:textSize="20sp"
+                android:layout_marginEnd="10dp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -296,7 +304,7 @@
                     android:maxLines="1"
                     android:text="Default Alarm"
                     android:textColor="@color/text_main"
-                    android:textSize="14sp"
+                    android:textSize="13sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -304,23 +312,23 @@
                     android:layout_height="wrap_content"
                     android:text="Tap to choose music or ringtone"
                     android:textColor="@color/text_muted"
-                    android:textSize="11sp" />
+                    android:textSize="10.5sp" />
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_choose_sound"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="38dp"
+                android:layout_height="34dp"
                 android:text="Choose"
-                android:textColor="@color/primary"
+                android:textColor="@color/text_sub"
                 android:textSize="11sp"
-                app:cornerRadius="19dp"
-                app:strokeColor="@color/primary" />
+                app:cornerRadius="0dp"
+                app:strokeColor="@color/surface_card_stroke_bright" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <!-- YouTube Music Container (shown when chip_type_youtube is checked) -->
+    <!-- YouTube Music Container -->
     <LinearLayout
         android:id="@+id/layout_youtube_music"
         android:layout_width="match_parent"
@@ -332,12 +340,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Song Name, Artist or music.youtube.com URL"
-            app:boxCornerRadiusBottomEnd="16dp"
-            app:boxCornerRadiusBottomStart="16dp"
-            app:boxCornerRadiusTopEnd="16dp"
-            app:boxCornerRadiusTopStart="16dp"
-            app:boxStrokeColor="@color/yt_red_glow"
-            app:hintTextColor="@color/yt_red_glow">
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/surface_card_stroke_bright"
+            app:hintTextColor="@color/text_sub">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_youtube_query"
@@ -346,14 +354,14 @@
                 android:inputType="textUri|text"
                 android:text="Lo-Fi Beats to Relax/Study to"
                 android:textColor="@color/text_main"
-                android:textSize="14sp" />
+                android:textSize="13.5sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- YouTube Music Quick Preset Chips -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:scrollbars="none">
 
             <com.google.android.material.chip.ChipGroup
@@ -369,6 +377,7 @@
                     android:layout_height="wrap_content"
                     android:text="🎧 Lo-Fi Chill"
                     android:textColor="@color/text_main"
+                    app:cornerRadius="0dp"
                     app:chipBackgroundColor="@color/surface_card_inner"
                     app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -377,8 +386,9 @@
                     style="@style/Widget.Material3.Chip.Suggestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="⚡ Workout Hype"
+                    android:text="⚡ Workout"
                     android:textColor="@color/text_main"
+                    app:cornerRadius="0dp"
                     app:chipBackgroundColor="@color/surface_card_inner"
                     app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -387,8 +397,9 @@
                     style="@style/Widget.Material3.Chip.Suggestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="☕ Morning Ambient"
+                    android:text="☕ Ambient"
                     android:textColor="@color/text_main"
+                    app:cornerRadius="0dp"
                     app:chipBackgroundColor="@color/surface_card_inner"
                     app:chipStrokeColor="@color/surface_card_stroke_bright" />
 
@@ -397,8 +408,9 @@
                     style="@style/Widget.Material3.Chip.Suggestion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🌌 Synthwave Focus"
+                    android:text="🌌 Synthwave"
                     android:textColor="@color/text_main"
+                    app:cornerRadius="0dp"
                     app:chipBackgroundColor="@color/surface_card_inner"
                     app:chipStrokeColor="@color/surface_card_stroke_bright" />
             </com.google.android.material.chip.ChipGroup>
@@ -407,10 +419,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="▶️ YouTube Music opens and plays this track when the countdown completes."
+            android:layout_marginTop="6dp"
+            android:text="▶️ Plays in YouTube Music when countdown completes."
             android:textColor="@color/text_muted"
-            android:textSize="11sp" />
+            android:textSize="10.5sp" />
     </LinearLayout>
 
 </LinearLayout>

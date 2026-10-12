@@ -78,32 +78,34 @@ class TimerAdapter(
                     binding.badgeStatus.setTextColor(ContextCompat.getColor(context, R.color.accent))
                     binding.btnItemPlayPause.text = "Pause"
                     binding.btnItemPlayPause.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.warning))
+                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.surface_card_inner))
+                    binding.btnItemPlayPause.setTextColor(ContextCompat.getColor(context, R.color.warning))
                 }
                 TimerState.PAUSED -> {
                     binding.badgeStatus.text = "PAUSED"
                     binding.badgeStatus.setTextColor(ContextCompat.getColor(context, R.color.warning))
                     binding.btnItemPlayPause.text = "Resume"
                     binding.btnItemPlayPause.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.primary))
+                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.surface_card_inner))
+                    binding.btnItemPlayPause.setTextColor(ContextCompat.getColor(context, R.color.text_main))
                 }
                 TimerState.FINISHED -> {
                     binding.badgeStatus.text = "FINISHED"
                     binding.badgeStatus.setTextColor(ContextCompat.getColor(context, R.color.danger))
                     binding.btnItemPlayPause.text = "Restart"
                     binding.btnItemPlayPause.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.accent))
+                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.surface_card_inner))
+                    binding.btnItemPlayPause.setTextColor(ContextCompat.getColor(context, R.color.text_main))
                 }
                 TimerState.IDLE -> {
                     binding.badgeStatus.text = "READY"
-                    binding.badgeStatus.setTextColor(ContextCompat.getColor(context, R.color.primary))
+                    binding.badgeStatus.setTextColor(ContextCompat.getColor(context, R.color.text_sub))
                     binding.btnItemPlayPause.text = "Start"
                     binding.btnItemPlayPause.backgroundTintList =
-                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.primary))
+                        ColorStateList.valueOf(ContextCompat.getColor(context, R.color.surface_card_inner))
+                    binding.btnItemPlayPause.setTextColor(ContextCompat.getColor(context, R.color.text_main))
                 }
             }
-
-            binding.btnItemPlayPause.setTextColor(0xFF06090E.toInt())
             binding.btnItemPlayPause.setOnClickListener { onPlayPause(timer) }
             binding.btnItemReset.setOnClickListener { onReset(timer) }
             binding.btnDelete.setOnClickListener { onDelete(timer) }

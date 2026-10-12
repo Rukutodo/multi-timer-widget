@@ -1,38 +1,39 @@
 <resources>
-    <!-- Brand & Accent Neon -->
-    <color name="primary">#38BDF8</color>
-    <color name="primary_neon">#00F0FF</color>
-    <color name="primary_dark">#0284C7</color>
-    <color name="primary_gradient_start">#00F0FF</color>
-    <color name="primary_gradient_end">#0284C7</color>
-    
-    <color name="accent">#10B981</color>
-    <color name="accent_glow">#34D399</color>
-    <color name="accent_emerald">#10B981</color>
+    <!-- Grayish-Black & Obsidian Monochrome Base -->
+    <color name="bg_dark">#090A0D</color>
+    <color name="bg_dark_gradient_end">#0E1015</color>
+    <color name="surface_card">#13141B</color>
+    <color name="surface_card_stroke">#242632</color>
+    <color name="surface_card_stroke_bright">#34384A</color>
+    <color name="surface_card_inner">#1A1C25</color>
+    <color name="surface_card_glow">#202330</color>
+    <color name="glass_tint">#161822</color>
 
-    <!-- Obsidian & Glassmorphic Surfaces -->
-    <color name="bg_dark">#06090E</color>
-    <color name="bg_dark_gradient_end">#0B101B</color>
-    <color name="surface_card">#0F172A</color>
-    <color name="surface_card_stroke">#1E293B</color>
-    <color name="surface_card_stroke_bright">#2E3E57</color>
-    <color name="surface_card_inner">#162036</color>
-    <color name="surface_card_glow">#1A253D</color>
-    <color name="glass_tint">#0D1527</color>
-
-    <!-- Typography -->
+    <!-- Typography: Pure White to Slate Grays -->
     <color name="text_main">#FFFFFF</color>
-    <color name="text_sub">#94A3B8</color>
-    <color name="text_muted">#64748B</color>
-    <color name="text_tertiary">#475569</color>
+    <color name="text_sub">#9496A1</color>
+    <color name="text_muted">#5E606A</color>
+    <color name="text_tertiary">#42444C</color>
 
-    <!-- Semantic Alerts & States -->
-    <color name="warning">#F59E0B</color>
-    <color name="danger">#F43F5E</color>
-    
-    <!-- YouTube Music Branding -->
-    <color name="yt_red">#FF0000</color>
-    <color name="yt_red_glow">#FF334B</color>
-    <color name="yt_badge_bg">#25080C</color>
-    <color name="yt_badge_stroke">#5E161F</color>
+    <!-- Subtle, Non-Contrasty Accent Hints -->
+    <color name="primary">#6B8FA3</color> <!-- Muted Slate Smoke -->
+    <color name="primary_neon">#E2E8F0</color> <!-- Crisp Off-White -->
+    <color name="primary_dark">#476373</color>
+    <color name="primary_gradient_start">#7C9FB3</color>
+    <color name="primary_gradient_end">#4F6D7E</color>
+
+    <!-- Muted Earthy/Sage Accent for Running States -->
+    <color name="accent">#638573</color> <!-- Muted Sage -->
+    <color name="accent_glow">#7FA390</color>
+    <color name="accent_emerald">#638573</color>
+
+    <!-- Restrained Status Alerts -->
+    <color name="warning">#947D60</color> <!-- Muted Warm Taupe -->
+    <color name="danger">#8F5A62</color>  <!-- Muted Dusty Wine -->
+
+    <!-- YouTube Music Subtle Hint (Muted Burgundy/Rose, not neon red) -->
+    <color name="yt_red">#8F5A62</color>
+    <color name="yt_red_glow">#A86E77</color>
+    <color name="yt_badge_bg">#1D1416</color>
+    <color name="yt_badge_stroke">#3D2529</color>
 </resources>

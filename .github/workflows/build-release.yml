@@ -37,44 +37,38 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.7.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.8.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.7.apk
+          path: release_assets/multi-timer-widget-v1.0.8.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.7
-          name: "Multi-Timer Widget v1.0.7 - Modern UI Redesign"
+          tag_name: v1.0.8
+          name: "Multi-Timer Widget v1.0.8 - Sharp Frosted Glass (Zero Radius)"
           body: |
-            ### 🎨 Multi-Timer Widget Release v1.0.7 - Modern UI Overhaul
+            ### ⬛ Multi-Timer Widget Release v1.0.8 - Sharp Frosted Glass Redesign
 
-            **Complete 2026 Material 3 Glassmorphism Redesign + New Modern Chrono App Icon + Live Stats Bar**
+            **Zero Rounded Corners + Grayish-Black Obsidian + Subtle Muted Hints + Frosted Glass**
 
-            #### 🌟 What's New in v1.0.7:
-            - 🎨 **Brand New 2026 Pro App Icon**:
-              - Replaced outdated styling with deep obsidian glass, dual luminous arcs (Electric Cyan `#00F0FF` & Emerald `#10B981`), and sleek floating chrono nodes.
-            - 📊 **Executive Stats Pill Bar**:
-              - Live dashboard header with active counters: `⚡ Active Timers`, `● Running Timers`, and `🔋 Current Render Engine`.
-            - 🪟 **Modern Glassmorphic Cards (24dp rounded corners)**:
-              - Elevated Obsidian cards (`#0F172A`) with luminous subtle borders (`#2E3E57`).
-              - High-contrast electric cyan 44sp countdown digits with JetBrains/Inter digital legibility.
-              - Rounded-cap gradient progress tracks (`#0284C7` to `#00F0FF`).
-            - ⏳ **Empty State Placeholder**:
-              - Engaging graphical empty state when no timers are active.
-            - 🪟 **Enhanced Add / Edit Sheet**:
-              - Added drag handle indicator pill, 16dp rounded input fields, and redesigned YouTube Music integration vibe chips.
-            - ⚡ **OxygenOS 16 / RemoteViews Compatibility**:
-              - All launcher widget layouts retain 100% RemoteViews-safe architecture.
+            #### 🌟 What's New in v1.0.8:
+            - 📐 **Zero Rounded Corners**:
+              - All cards, buttons, chips, dialogs, progress bars, and launcher widgets now feature razor-sharp, zero-radius architectural edges.
+            - 🖤 **Grayish-Black Obsidian Color Scheme**:
+              - Deep obsidian backgrounds (`#090A0D`), dark frosted slate cards (`#13141B`), and hairline borders (`#242632`).
+            - 🎨 **Subtle, Non-Contrasty Accents**:
+              - Replaced harsh neons with muted slate smoke (`#6B8FA3`), earthy sage (`#638573`), and warm taupe (`#947D60`).
+            - 🪟 **Sharp Frosted Glass Launcher Widgets**:
+              - Both the Multi-Timer list and Single-Timer hero widgets rendered with zero radius and clean frosted panels.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.7.apk`** below to install!
-          files: release_assets/multi-timer-widget-v1.0.7.apk
+            Download **`multi-timer-widget-v1.0.8.apk`** below to install!
+          files: release_assets/multi-timer-widget-v1.0.8.apk
           draft: false
           prerelease: false

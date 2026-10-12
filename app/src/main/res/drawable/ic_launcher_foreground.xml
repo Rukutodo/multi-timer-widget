@@ -4,62 +4,41 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- Luminous primary outer timer track (Electric Cyan) -->
-    <path
-        android:strokeColor="#00F0FF"
-        android:strokeWidth="4.5"
-        android:strokeLineCap="round"
-        android:pathData="M54,25 A29,29 0 1,1 25,54" />
-
-    <!-- Luminous progress completion arc (Emerald Green Glow) -->
-    <path
-        android:strokeColor="#10B981"
-        android:strokeWidth="4.5"
-        android:strokeLineCap="round"
-        android:pathData="M54,25 A29,29 0 0,1 83,54" />
-
-    <!-- Sleek Top Chrono Crown -->
-    <path
-        android:fillColor="#38BDF8"
-        android:pathData="M50,15 h8 v4 h-8 z"/>
-    <path
-        android:fillColor="#1E293B"
-        android:pathData="M47,13 h14 v2 h-14 z"/>
-
-    <!-- Dual Action Corner Chrono Buttons -->
-    <path
-        android:strokeColor="#38BDF8"
-        android:strokeWidth="2.5"
-        android:strokeLineCap="round"
-        android:pathData="M74,34 L78,30"/>
-    <path
-        android:strokeColor="#64748B"
-        android:strokeWidth="2.5"
-        android:strokeLineCap="round"
-        android:pathData="M34,34 L30,30"/>
-
-    <!-- Minimalist precision minute ticks -->
-    <path
-        android:fillColor="#64748B"
-        android:pathData="M54,30 h1 v3 h-1 z M78,54 h-3 v1 h3 z M54,78 h1 v-3 h-1 z M30,54 h3 v1 h-3 z"/>
-
-    <!-- High-Fi Center Hands: 12-o'clock minute hand & 3-o'clock hour hand -->
+    <!-- Sharp square chronometer dial -->
     <path
         android:strokeColor="#FFFFFF"
-        android:strokeWidth="3.5"
-        android:strokeLineCap="round"
-        android:pathData="M54,54 L54,35" />
-    <path
-        android:strokeColor="#00F0FF"
-        android:strokeWidth="3.5"
-        android:strokeLineCap="round"
-        android:pathData="M54,54 L69,54" />
+        android:strokeWidth="3"
+        android:pathData="M28,28 h52 v52 h-52 z" />
 
-    <!-- Luminous Core Node -->
+    <!-- Accent progress segment (Muted Slate Smoke) -->
     <path
-        android:fillColor="#10B981"
-        android:pathData="M54,54m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+        android:strokeColor="#6B8FA3"
+        android:strokeWidth="4"
+        android:pathData="M28,28 h36" />
+
+    <!-- Precision ticks -->
+    <path
+        android:strokeColor="#5E606A"
+        android:strokeWidth="1.5"
+        android:pathData="M54,24 L54,28 M54,80 L54,84 M24,54 L28,54 M80,54 L84,54"/>
+
+    <!-- Sharp Top Crown (Zero radius) -->
+    <path
+        android:fillColor="#6B8FA3"
+        android:pathData="M50,18 h8 v4 h-8 z"/>
+
+    <!-- Minimalist hands: 12-o'clock and 3-o'clock -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:pathData="M54,54 L54,36" />
+    <path
+        android:strokeColor="#6B8FA3"
+        android:strokeWidth="3"
+        android:pathData="M54,54 L68,54" />
+
+    <!-- Sharp square center node -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M54,54m-1.5,0a1.5,1.5 0,1 1,3 0a1.5,1.5 0,1 1,-3 0"/>
+        android:pathData="M52,52 h4 v4 h-4 z"/>
 </vector>

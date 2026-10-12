@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="🎵 Default Alarm"
-                android:textColor="#38BDF8"
+                android:textColor="#9496A1"
                 android:textSize="11sp" />
         </LinearLayout>
 
@@ -48,7 +48,7 @@
             android:background="@drawable/btn_action_bg"
             android:gravity="center"
             android:text="◀"
-            android:textColor="#38BDF8"
+            android:textColor="#D1D5DB"
             android:textSize="12sp"
             android:layout_marginEnd="6dp" />
 
@@ -60,14 +60,14 @@
             android:background="@drawable/btn_action_bg"
             android:gravity="center"
             android:text="▶"
-            android:textColor="#38BDF8"
+            android:textColor="#D1D5DB"
             android:textSize="12sp" />
     </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#1E293B"
+        android:background="#242632"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="12dp" />
 
@@ -84,7 +84,7 @@
             android:id="@+id/hero_chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#00F0FF"
+            android:textColor="#FFFFFF"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25:00"
-            android:textColor="#00F0FF"
+            android:textColor="#FFFFFF"
             android:textSize="36sp"
             android:textStyle="bold"
             android:visibility="gone" />
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="READY"
-            android:textColor="#94A3B8"
+            android:textColor="#9496A1"
             android:textSize="11sp"
             android:textStyle="bold" />
     </LinearLayout>
