@@ -96,6 +96,7 @@ class TimerAdapter(
                 }
             }
 
+            binding.btnItemPlayPause.setTextColor(0xFF06090E.toInt())
             binding.btnItemPlayPause.setOnClickListener { onPlayPause(timer) }
             binding.btnItemReset.setOnClickListener { onReset(timer) }
             binding.btnDelete.setOnClickListener { onDelete(timer) }

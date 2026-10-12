@@ -37,32 +37,36 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.1.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.2.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.1.apk
+          path: release_assets/multi-timer-widget-v1.0.2.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.1
-          name: "Multi-Timer Widget v1.0.1"
+          tag_name: v1.0.2
+          name: "Multi-Timer Widget v1.0.2"
           body: |
-            ### 📱 Multi-Timer Widget Release v1.0.1
+            ### 📱 Multi-Timer Widget Release v1.0.2
 
-            **Fixes for OnePlus (OxygenOS) & Android 14/15/16 Launcher Widget Loading**
+            **Loud Alarm Sound + Modern 2026 UI & Icon Redesign**
 
-            #### 🛠️ Fixes in this release:
-            - **Fixed "Problem loading widget" error**: Removed unsupported `<ripple>` XML tags from widget RemoteViews buttons that caused OnePlus Launcher inflation to abort.
-            - **Unified Single-Type Layout**: Consolidated widget item layout into a single, bulletproof XML template with `viewTypeCount = 1` to prevent launcher view recycling errors.
-            - **Clean Framework Progress Bar**: Standardized progress bars to use framework styles that resolve across all third-party and OEM launcher themes.
-            - **Proper RemoteViews URI Hook**: Standardized adapter data URI for seamless widget provider sync.
-            
+            #### 🌟 What's New in v1.0.2:
+            - 🔊 **Loud Audio Alarm**: Bound `AudioAttributes.USAGE_ALARM` to both the notification channel and direct `Ringtone` playback so finished timers ring aloud over system alarm streams even if notifications are quiet.
+            - 🎨 **Modern Adaptive App Icon**: Replaced old 2010 lock icon with a custom modern neon chronograph adaptive icon.
+            - ✨ **Complete UI Redesign**:
+              - Luxury OLED obsidian backgrounds (`#06090E`) with vibrant cyan (`#00F0FF`) and emerald (`#10B981`) accents.
+              - Big hero countdown typography (40sp) with high-contrast pill action buttons.
+              - Quick preset chips (`1m`, `5m`, `15m`, `25m Focus`, `45m`, `60m`) in the creation dialog.
+              - Glassmorphic card styling for both the app and the home screen widget.
+            - 📱 **OnePlus & OxygenOS Optimization**: Fully compatible with OnePlus launcher and Android 14/15/16.
+
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.1.apk`** below to update or install!
-          files: release_assets/multi-timer-widget-v1.0.1.apk
+            Download **`multi-timer-widget-v1.0.2.apk`** below to install the update!
+          files: release_assets/multi-timer-widget-v1.0.2.apk
           draft: false
           prerelease: false

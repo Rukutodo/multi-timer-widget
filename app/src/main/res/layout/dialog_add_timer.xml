@@ -5,15 +5,25 @@
     android:layout_height="wrap_content"
     android:background="@color/surface_card"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="24dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="CREATE TIMER"
+        android:textColor="@color/primary_neon"
+        android:textSize="11sp"
+        android:letterSpacing="0.12"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="16dp"
-        android:text="Create New Timer"
+        android:text="New Countdown"
         android:textColor="@color/text_main"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <!-- Timer Name -->
@@ -22,6 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="Timer Name (e.g. Focus Sprint)"
+        app:boxCornerRadiusBottomEnd="14dp"
+        app:boxCornerRadiusBottomStart="14dp"
+        app:boxCornerRadiusTopEnd="14dp"
+        app:boxCornerRadiusTopStart="14dp"
         app:boxStrokeColor="@color/primary"
         app:hintTextColor="@color/primary">
 
@@ -33,7 +47,92 @@
             android:textColor="@color/text_main" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Duration Inputs -->
+    <!-- Preset Chips Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Quick Presets"
+        android:textColor="@color/text_sub"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- Quick Presets -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_presets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_1m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 min"
+                android:textColor="@color/text_main"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_5m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 min"
+                android:textColor="@color/text_main"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_15m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 min"
+                android:textColor="@color/text_main"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_25m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25 min (Focus)"
+                android:textColor="@color/primary_neon"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/primary" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_45m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45 min"
+                android:textColor="@color/text_main"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_60m"
+                style="@style/Widget.Material3.Chip.Suggestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60 min"
+                android:textColor="@color/text_main"
+                app:chipBackgroundColor="@color/surface_card_inner"
+                app:chipStrokeColor="@color/surface_card_stroke" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <!-- Custom Duration Inputs -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,12 +144,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="6dp"
-            android:hint="Hours">
+            android:hint="Hours"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_hours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="number"
                 android:text="0"
                 android:textColor="@color/text_main" />
@@ -62,14 +166,19 @@
             android:layout_weight="1"
             android:layout_marginStart="3dp"
             android:layout_marginEnd="3dp"
-            android:hint="Minutes">
+            android:hint="Minutes"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_minutes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="number"
-                android:text="15"
+                android:text="25"
                 android:textColor="@color/text_main" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -78,12 +187,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="6dp"
-            android:hint="Seconds">
+            android:hint="Seconds"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusTopStart="12dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_seconds"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="number"
                 android:text="0"
                 android:textColor="@color/text_main" />

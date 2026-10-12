@@ -118,6 +118,43 @@ class MainActivity : AppCompatActivity() {
     private fun showAddTimerDialog() {
         val dialogBinding = DialogAddTimerBinding.inflate(LayoutInflater.from(this))
 
+        dialogBinding.chip1m.setOnClickListener {
+            dialogBinding.editHours.setText("0")
+            dialogBinding.editMinutes.setText("1")
+            dialogBinding.editSeconds.setText("0")
+            if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("Quick 1m")
+        }
+        dialogBinding.chip5m.setOnClickListener {
+            dialogBinding.editHours.setText("0")
+            dialogBinding.editMinutes.setText("5")
+            dialogBinding.editSeconds.setText("0")
+            if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("5 Min Break")
+        }
+        dialogBinding.chip15m.setOnClickListener {
+            dialogBinding.editHours.setText("0")
+            dialogBinding.editMinutes.setText("15")
+            dialogBinding.editSeconds.setText("0")
+            if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("Short Sprint")
+        }
+        dialogBinding.chip25m.setOnClickListener {
+            dialogBinding.editHours.setText("0")
+            dialogBinding.editMinutes.setText("25")
+            dialogBinding.editSeconds.setText("0")
+            if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("Focus Session")
+        }
+        dialogBinding.chip45m.setOnClickListener {
+            dialogBinding.editHours.setText("0")
+            dialogBinding.editMinutes.setText("45")
+            dialogBinding.editSeconds.setText("0")
+            if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("Deep Work")
+        }
+        dialogBinding.chip60m.setOnClickListener {
+            dialogBinding.editHours.setText("1")
+            dialogBinding.editMinutes.setText("0")
+            dialogBinding.editSeconds.setText("0")
+            if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("1 Hour Block")
+        }
+
         MaterialAlertDialogBuilder(this)
             .setView(dialogBinding.root)
             .setPositiveButton("Create") { _, _ ->

@@ -1,12 +1,16 @@
 <resources>
     <color name="primary">#38BDF8</color>
+    <color name="primary_neon">#00F0FF</color>
     <color name="primary_dark">#0284C7</color>
     <color name="accent">#10B981</color>
-    <color name="bg_dark">#0B0F19</color>
-    <color name="surface_card">#161F30</color>
-    <color name="surface_card_stroke">#26354D</color>
-    <color name="text_main">#F8FAFC</color>
+    <color name="accent_glow">#34D399</color>
+    <color name="bg_dark">#06090E</color>
+    <color name="surface_card">#0F172A</color>
+    <color name="surface_card_stroke">#1E293B</color>
+    <color name="surface_card_inner">#162036</color>
+    <color name="text_main">#FFFFFF</color>
     <color name="text_sub">#94A3B8</color>
+    <color name="text_muted">#64748B</color>
     <color name="warning">#F59E0B</color>
-    <color name="danger">#EF4444</color>
+    <color name="danger">#F43F5E</color>
 </resources>

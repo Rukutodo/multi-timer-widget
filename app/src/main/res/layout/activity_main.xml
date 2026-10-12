@@ -8,14 +8,36 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg_dark">
+        android:background="@color/bg_dark"
+        app:elevation="0dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Multi-Timer"
-            app:titleTextColor="@color/text_main" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="24dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MULTI-TIMER"
+                android:textColor="@color/primary_neon"
+                android:textSize="12sp"
+                android:letterSpacing="0.15"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Active Dashboard"
+                android:textColor="@color/text_main"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,23 +50,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="100dp">
 
-            <!-- Battery Strategy Card -->
+            <!-- Battery Strategy Glassmorphic Card -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="24dp"
                 app:cardBackgroundColor="@color/surface_card"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
                 app:strokeColor="@color/surface_card_stroke"
-                app:strokeWidth="1dp">
+                app:strokeWidth="1.2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="18dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -59,8 +84,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:layout_marginBottom="12dp"
-                        android:text="Native Chronometer: SystemUI ticks the countdown at 0% battery consumption."
+                        android:layout_marginBottom="14dp"
+                        android:text="Native Chronometer: SystemUI renders the countdown at 0% battery consumption."
                         android:textColor="@color/text_sub"
                         android:textSize="12sp" />
 
@@ -74,19 +99,25 @@
                             android:id="@+id/btn_mode_chronometer"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="44dp"
                             android:layout_weight="1"
                             android:text="⚡ Battery Saver"
-                            android:textSize="11sp" />
+                            android:textColor="@color/text_main"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="22dp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_mode_loop"
                             style="?attr/materialButtonOutlinedStyle"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="44dp"
                             android:layout_weight="1"
                             android:text="✨ High-Fi Loop"
-                            android:textSize="11sp" />
+                            android:textColor="@color/text_main"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            app:cornerRadius="22dp" />
                     </com.google.android.material.button.MaterialButtonToggleGroup>
 
                 </LinearLayout>
@@ -96,10 +127,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="Your Active &amp; Saved Timers"
+                android:layout_marginBottom="12dp"
+                android:text="Your Timers"
                 android:textColor="@color/text_main"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -108,24 +139,21 @@
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false" />
 
-            <!-- Bottom spacing for FAB -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="80dp" />
-
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_timer"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="20dp"
+        android:layout_margin="24dp"
         android:backgroundTint="@color/primary"
         android:text="New Timer"
-        android:textColor="#0F172A"
+        android:textColor="#06090E"
+        android:textStyle="bold"
+        app:cornerRadius="26dp"
         app:icon="@drawable/ic_add"
-        app:iconTint="#0F172A" />
+        app:iconTint="#06090E" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
