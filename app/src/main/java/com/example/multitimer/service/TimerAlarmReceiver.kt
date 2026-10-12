@@ -24,26 +24,38 @@ class TimerAlarmReceiver : BroadcastReceiver() {
     companion object {
         const val EXTRA_TIMER_ID = "extra_timer_id"
         const val EXTRA_TIMER_NAME = "extra_timer_name"
-        private const val CHANNEL_ID = "timer_alarm_channel_v2"
+        const val EXTRA_SOUND_URI = "extra_sound_uri"
+        const val EXTRA_SOUND_NAME = "extra_sound_name"
+        private const val CHANNEL_ID = "timer_alarm_channel_v3"
         private const val CHANNEL_NAME = "Timer Alarms"
     }
 
     override fun onReceive(context: Context, intent: Intent) {
         val timerId = intent.getStringExtra(EXTRA_TIMER_ID) ?: return
         val timerName = intent.getStringExtra(EXTRA_TIMER_NAME) ?: "Timer"
+        val soundUriString = intent.getStringExtra(EXTRA_SOUND_URI)
 
         val repository = TimerRepository.getInstance(context)
         repository.markFinished(timerId)
         repository.notifyWidgets()
 
-        triggerAlert(context, timerName, timerId.hashCode())
+        triggerAlert(context, timerName, timerId.hashCode(), soundUriString)
     }
 
-    private fun triggerAlert(context: Context, timerName: String, notificationId: Int) {
+    private fun triggerAlert(context: Context, timerName: String, notificationId: Int, customSoundUriString: String?) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+        val parsedCustomUri = if (!customSoundUriString.isNullOrEmpty()) {
+            try {
+                android.net.Uri.parse(customSoundUriString)
+            } catch (e: Exception) {
+                null
+            }
+        } else null
+
+        val soundUri = parsedCustomUri
+            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
             ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
             ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 

@@ -1,11 +1,15 @@
 package com.example.multitimer.ui
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -29,6 +33,38 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var repository: TimerRepository
     private lateinit var adapter: TimerAdapter
+
+    private var pendingSoundCallback: ((Uri?, String) -> Unit)? = null
+
+    private val soundPickerLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK && result.data != null) {
+            val uri: Uri? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                result.data?.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI, Uri::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                result.data?.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+            } ?: result.data?.data
+
+            if (uri != null) {
+                try {
+                    contentResolver.takePersistableUriPermission(
+                        uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+                } catch (e: Exception) {
+                    // Non-persistable content URIs are fine
+                }
+
+                val ringtone = RingtoneManager.getRingtone(this, uri)
+                val title = ringtone?.getTitle(this) ?: "Custom Music"
+                pendingSoundCallback?.invoke(uri, title)
+            } else {
+                pendingSoundCallback?.invoke(null, "Default Alarm")
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,6 +154,9 @@ class MainActivity : AppCompatActivity() {
     private fun showAddTimerDialog() {
         val dialogBinding = DialogAddTimerBinding.inflate(LayoutInflater.from(this))
 
+        var chosenUri: Uri? = null
+        var chosenName = "Default Alarm"
+
         dialogBinding.chip1m.setOnClickListener {
             dialogBinding.editHours.setText("0")
             dialogBinding.editMinutes.setText("1")
@@ -155,6 +194,25 @@ class MainActivity : AppCompatActivity() {
             if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("1 Hour Block")
         }
 
+        // Custom Sound Picker action
+        val openSoundPicker = {
+            pendingSoundCallback = { uri, name ->
+                chosenUri = uri
+                chosenName = name
+                dialogBinding.textSelectedSound.text = name
+            }
+            val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER).apply {
+                putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_ALL)
+                putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_DEFAULT, true)
+                putExtra(RingtoneManager.EXTRA_RINGTONE_SHOW_SILENT, false)
+                putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Timer Sound or Music")
+            }
+            soundPickerLauncher.launch(intent)
+        }
+
+        dialogBinding.btnChooseSound.setOnClickListener { openSoundPicker() }
+        dialogBinding.cardSelectSound.setOnClickListener { openSoundPicker() }
+
         MaterialAlertDialogBuilder(this)
             .setView(dialogBinding.root)
             .setPositiveButton("Create") { _, _ ->
@@ -176,12 +234,14 @@ class MainActivity : AppCompatActivity() {
                     id = UUID.randomUUID().toString(),
                     name = finalName,
                     totalDurationMs = totalMs,
-                    remainingMs = totalMs
+                    remainingMs = totalMs,
+                    soundUri = chosenUri?.toString(),
+                    soundName = chosenName
                 )
 
                 repository.saveTimer(newTimer)
                 refreshList()
-                Toast.makeText(this, "Created '$finalName'", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Created '$finalName' with sound '$chosenName'", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel", null)
             .show()

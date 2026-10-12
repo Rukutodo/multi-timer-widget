@@ -37,36 +37,35 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.2.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.3.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.2.apk
+          path: release_assets/multi-timer-widget-v1.0.3.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.2
-          name: "Multi-Timer Widget v1.0.2"
+          tag_name: v1.0.3
+          name: "Multi-Timer Widget v1.0.3"
           body: |
-            ### 📱 Multi-Timer Widget Release v1.0.2
+            ### 📱 Multi-Timer Widget Release v1.0.3
 
-            **Loud Alarm Sound + Modern 2026 UI & Icon Redesign**
+            **Custom Per-Timer Music & Sound Selection**
 
-            #### 🌟 What's New in v1.0.2:
-            - 🔊 **Loud Audio Alarm**: Bound `AudioAttributes.USAGE_ALARM` to both the notification channel and direct `Ringtone` playback so finished timers ring aloud over system alarm streams even if notifications are quiet.
-            - 🎨 **Modern Adaptive App Icon**: Replaced old 2010 lock icon with a custom modern neon chronograph adaptive icon.
-            - ✨ **Complete UI Redesign**:
-              - Luxury OLED obsidian backgrounds (`#06090E`) with vibrant cyan (`#00F0FF`) and emerald (`#10B981`) accents.
-              - Big hero countdown typography (40sp) with high-contrast pill action buttons.
-              - Quick preset chips (`1m`, `5m`, `15m`, `25m Focus`, `45m`, `60m`) in the creation dialog.
-              - Glassmorphic card styling for both the app and the home screen widget.
-            - 📱 **OnePlus & OxygenOS Optimization**: Fully compatible with OnePlus launcher and Android 14/15/16.
+            #### 🌟 What's New in v1.0.3:
+            - 🎵 **Custom Music & Sound for Each Timer**: Select different music, songs, or ringtones for different timers!
+              - Choose from system ringtones, alarms, or your own local music files / downloads.
+              - When that specific timer finishes, it rings aloud playing your chosen audio track.
+            - 🏷️ **Music Track Display**: Each timer card in the app displays the assigned sound name (`🎵 Focus Chimes`, `🎵 My Song.mp3`, etc.).
+            - 🔊 **Loud Audio Alarm**: Bound `AudioAttributes.USAGE_ALARM` to ring aloud over the alarm audio stream.
+            - 🎨 **Modern 2026 UI & Adaptive Icon**: Neon obsidian aesthetic with quick preset chips (`1m`, `5m`, `15m`, `25m Focus`, `45m`, `60m`).
+            - 📱 **OnePlus (OxygenOS) Widget Compatibility**: Fully tested and optimized for OnePlus Launcher with zero RemoteViews crash bugs.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.2.apk`** below to install the update!
-          files: release_assets/multi-timer-widget-v1.0.2.apk
+            Download **`multi-timer-widget-v1.0.3.apk`** below to install or update!
+          files: release_assets/multi-timer-widget-v1.0.3.apk
           draft: false
           prerelease: false

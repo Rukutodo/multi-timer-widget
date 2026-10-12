@@ -205,6 +205,8 @@ class TimerRepository private constructor(private val context: Context) {
         val intent = Intent(context, TimerAlarmReceiver::class.java).apply {
             putExtra(TimerAlarmReceiver.EXTRA_TIMER_ID, timer.id)
             putExtra(TimerAlarmReceiver.EXTRA_TIMER_NAME, timer.name)
+            putExtra(TimerAlarmReceiver.EXTRA_SOUND_URI, timer.soundUri)
+            putExtra(TimerAlarmReceiver.EXTRA_SOUND_NAME, timer.soundName)
         }
 
         val pendingIntent = PendingIntent.getBroadcast(

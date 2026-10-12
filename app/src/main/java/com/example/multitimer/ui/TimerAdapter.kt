@@ -44,6 +44,7 @@ class TimerAdapter(
 
         fun bind(timer: TimerModel) {
             binding.textTimerName.text = timer.name
+            binding.textSoundName.text = "🎵 " + timer.soundName
 
             val remainingMs = when (timer.state) {
                 TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
