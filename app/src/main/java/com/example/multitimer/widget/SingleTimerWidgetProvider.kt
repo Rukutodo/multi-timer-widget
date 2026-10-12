@@ -66,7 +66,11 @@ class SingleTimerWidgetProvider : AppWidgetProvider() {
             val timer = timers[index]
 
             views.setTextViewText(R.id.hero_timer_name, timer.name)
-            views.setTextViewText(R.id.hero_sound_name, "🎵 " + timer.soundName)
+            if (timer.isYouTubeMusic) {
+                views.setTextViewText(R.id.hero_sound_name, "▶️ " + (timer.youTubeQuery ?: timer.soundName))
+            } else {
+                views.setTextViewText(R.id.hero_sound_name, "🎵 " + timer.soundName)
+            }
 
             // Tap root / title -> Launch Main App
             val appIntent = Intent(context, MainActivity::class.java).apply {

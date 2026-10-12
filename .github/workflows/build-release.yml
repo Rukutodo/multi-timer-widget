@@ -37,41 +37,44 @@ jobs:
       - name: Prepare APK Asset
         run: |
           mkdir -p release_assets
-          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.4.apk
+          cp app/build/outputs/apk/release/app-release.apk release_assets/multi-timer-widget-v1.0.5.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multi-timer-widget-apk
-          path: release_assets/multi-timer-widget-v1.0.4.apk
+          path: release_assets/multi-timer-widget-v1.0.5.apk
 
       - name: Create GitHub Release & Attach APK
         uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.0.4
-          name: "Multi-Timer Widget v1.0.4"
+          tag_name: v1.0.5
+          name: "Multi-Timer Widget v1.0.5"
           body: |
-            ### 📱 Multi-Timer Widget Release v1.0.4
+            ### 📱 Multi-Timer Widget Release v1.0.5
 
-            **Major Widget Reliability Engine + Brand New Hero Card Widget**
+            **YouTube Music Integration + Hero Timer Card Widget + OnePlus Launcher Engine**
 
-            #### 🌟 Highlights & Fixes in v1.0.4:
-            - 🛡️ **Guaranteed Widget Loading (OxygenOS / OnePlus)**:
-              - Added `Binder.clearCallingIdentity()` around RemoteViews data retrieval to prevent IPC permission blocks by system launcher services.
-              - Refactored widget list containers with bounded FrameLayout to eliminate layout measurement overflow.
-              - Added immediate `notifyAppWidgetViewDataChanged` triggering on widget initialization.
-              - Set `android:exported="true"` on `WidgetActionReceiver` so OnePlus Launcher can trigger Play/Pause/Reset broadcasts.
+            #### 🌟 What's New in v1.0.5:
+            - ▶️ **YouTube Music Integration**:
+              - Set songs, playlists, or artist tracks from YouTube Music (`com.google.android.apps.youtube.music`) as custom alarm sounds for individual timers.
+              - Quick curated presets: `🎧 Lo-Fi Chill`, `⚡ Workout Hype`, `☕ Morning Ambient`, `🌌 Synthwave Focus`.
+              - When your timer finishes, it launches and plays directly in YouTube Music while sounding a loud alarm chime and vibration so you never miss an alert.
+              - Prominent `[▶️ Open YouTube Music]` heads-up notification action button with full-screen popup.
             - 🃏 **Brand New Hero Timer Card Widget**:
-              - In addition to the scrollable list, you now have a standalone **Timer Card (Hero Widget)**!
-              - Big glowing countdown digits (`00:25:00`).
-              - Prominent tactile Play/Pause and Reset buttons.
-              - Quick `<` and `>` flip buttons to cycle through all your named timers directly on the card!
-              - Works without adapter services, guaranteeing 100% reliability on any launcher.
-            - 🎵 **Custom Music & Ringtones**: Pick distinct songs or ringtones for each timer with loud `USAGE_ALARM` playback.
-            - 🎨 **Modern 2026 Obsidian UI & Adaptive Chrono Icon**.
+              - Standalone, high-fidelity **Timer Card (Hero Widget)** for your home screen.
+              - Big glowing countdown typography (`00:25:00`) and tactile Play/Pause and Reset buttons.
+              - Quick `<` and `>` flip controls to cycle through all your active timers directly on the card without opening the app.
+            - 🛡️ **Guaranteed Widget Reliability (OnePlus / OxygenOS & Android 16)**:
+              - Fixed Launcher IPC security tokens using `Binder.clearCallingIdentity()`.
+              - Bounded FrameLayout containers to eliminate OnePlus Launcher inflation failures.
+              - Exported widget action receiver for instant touch response.
+            - 🎵 **System Audio / File Picker**: Pick local music files, MP3s, or device ringtones with `USAGE_ALARM` loud playback.
 
             #### 📥 Download & Install
-            Download **`multi-timer-widget-v1.0.4.apk`** below to install or update!
-          files: release_assets/multi-timer-widget-v1.0.4.apk
+            Download **`multi-timer-widget-v1.0.5.apk`** below to install or update!
+          files: release_assets/multi-timer-widget-v1.0.5.apk
           draft: false
           prerelease: false

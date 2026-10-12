@@ -205,7 +205,7 @@
 
     </LinearLayout>
 
-    <!-- Music / Sound Selection Card -->
+    <!-- Music / Sound Selection Category -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -216,6 +216,38 @@
         android:textSize="12sp"
         android:textStyle="bold" />
 
+    <!-- Audio Type Selector: System vs YouTube Music -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_audio_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_type_system"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="🔔 System / File"
+            android:textColor="@color/text_main"
+            app:chipBackgroundColor="@color/surface_card_inner"
+            app:chipStrokeColor="@color/primary" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_type_youtube"
+            style="@style/Widget.Material3.Chip.Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="▶️ YouTube Music"
+            android:textColor="@color/text_main"
+            app:chipBackgroundColor="@color/surface_card_inner"
+            app:chipStrokeColor="@color/surface_card_stroke" />
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- System Sound Selection Card -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card_select_sound"
         android:layout_width="match_parent"
@@ -277,5 +309,98 @@
                 app:strokeColor="@color/primary" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <!-- YouTube Music Container (shown when chip_type_youtube is checked) -->
+    <LinearLayout
+        android:id="@+id/layout_youtube_music"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Song Name, Artist or music.youtube.com URL"
+            app:boxCornerRadiusBottomEnd="14dp"
+            app:boxCornerRadiusBottomStart="14dp"
+            app:boxCornerRadiusTopEnd="14dp"
+            app:boxCornerRadiusTopStart="14dp"
+            app:boxStrokeColor="@color/yt_red_glow"
+            app:hintTextColor="@color/yt_red_glow">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_youtube_query"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textUri|text"
+                android:text="Lo-Fi Beats to Relax/Study to"
+                android:textColor="@color/text_main"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- YouTube Music Quick Preset Chips -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_yt_presets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_yt_lofi"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🎧 Lo-Fi Chill"
+                    android:textColor="@color/text_main"
+                    app:chipBackgroundColor="@color/surface_card_inner"
+                    app:chipStrokeColor="@color/surface_card_stroke" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_yt_hype"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="⚡ Workout Hype"
+                    android:textColor="@color/text_main"
+                    app:chipBackgroundColor="@color/surface_card_inner"
+                    app:chipStrokeColor="@color/surface_card_stroke" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_yt_ambient"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="☕ Morning Ambient"
+                    android:textColor="@color/text_main"
+                    app:chipBackgroundColor="@color/surface_card_inner"
+                    app:chipStrokeColor="@color/surface_card_stroke" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_yt_synth"
+                    style="@style/Widget.Material3.Chip.Suggestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🌌 Synthwave Focus"
+                    android:textColor="@color/text_main"
+                    app:chipBackgroundColor="@color/surface_card_inner"
+                    app:chipStrokeColor="@color/surface_card_stroke" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="▶️ YouTube Music opens and plays this track when the timer finishes."
+            android:textColor="@color/text_muted"
+            android:textSize="11sp" />
+    </LinearLayout>
 
 </LinearLayout>

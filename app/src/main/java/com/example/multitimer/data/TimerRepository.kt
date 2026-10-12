@@ -13,6 +13,7 @@ import com.example.multitimer.R
 import com.example.multitimer.service.TimerAlarmReceiver
 import com.example.multitimer.service.TimerTickService
 import com.example.multitimer.widget.MultiTimerWidgetProvider
+import com.example.multitimer.widget.SingleTimerWidgetProvider
 import org.json.JSONArray
 import java.util.UUID
 
@@ -218,6 +219,8 @@ class TimerRepository private constructor(private val context: Context) {
             putExtra(TimerAlarmReceiver.EXTRA_TIMER_NAME, timer.name)
             putExtra(TimerAlarmReceiver.EXTRA_SOUND_URI, timer.soundUri)
             putExtra(TimerAlarmReceiver.EXTRA_SOUND_NAME, timer.soundName)
+            putExtra(TimerAlarmReceiver.EXTRA_IS_YOUTUBE, timer.isYouTubeMusic)
+            putExtra(TimerAlarmReceiver.EXTRA_YOUTUBE_QUERY, timer.youTubeQuery)
         }
 
         val pendingIntent = PendingIntent.getBroadcast(

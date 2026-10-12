@@ -13,4 +13,6 @@
     <color name="text_muted">#64748B</color>
     <color name="warning">#F59E0B</color>
     <color name="danger">#F43F5E</color>
+    <color name="yt_red">#FF0000</color>
+    <color name="yt_red_glow">#FF334B</color>
 </resources>

@@ -194,6 +194,34 @@ class MainActivity : AppCompatActivity() {
             if (dialogBinding.editTimerName.text.isNullOrEmpty()) dialogBinding.editTimerName.setText("1 Hour Block")
         }
 
+        // Audio Source Switch: System Sound vs YouTube Music
+        dialogBinding.chipTypeSystem.setOnClickListener {
+            dialogBinding.chipTypeSystem.isChecked = true
+            dialogBinding.chipTypeYoutube.isChecked = false
+            dialogBinding.cardSelectSound.visibility = View.VISIBLE
+            dialogBinding.layoutYoutubeMusic.visibility = View.GONE
+        }
+        dialogBinding.chipTypeYoutube.setOnClickListener {
+            dialogBinding.chipTypeYoutube.isChecked = true
+            dialogBinding.chipTypeSystem.isChecked = false
+            dialogBinding.cardSelectSound.visibility = View.GONE
+            dialogBinding.layoutYoutubeMusic.visibility = View.VISIBLE
+        }
+
+        // YouTube Preset Chips
+        dialogBinding.chipYtLofi.setOnClickListener {
+            dialogBinding.editYoutubeQuery.setText("Lo-Fi Beats to Relax/Study to")
+        }
+        dialogBinding.chipYtHype.setOnClickListener {
+            dialogBinding.editYoutubeQuery.setText("Workout Hype Music Mix")
+        }
+        dialogBinding.chipYtAmbient.setOnClickListener {
+            dialogBinding.editYoutubeQuery.setText("Morning Ambient Acoustic Chill")
+        }
+        dialogBinding.chipYtSynth.setOnClickListener {
+            dialogBinding.editYoutubeQuery.setText("Synthwave Focus Cyberpunk")
+        }
+
         // Custom Sound Picker action
         val openSoundPicker = {
             pendingSoundCallback = { uri, name ->
@@ -230,18 +258,33 @@ class MainActivity : AppCompatActivity() {
                     return@setPositiveButton
                 }
 
+                val isYouTube = dialogBinding.chipTypeYoutube.isChecked
+                val ytQuery = if (isYouTube) {
+                    val raw = dialogBinding.editYoutubeQuery.text?.toString()?.trim()
+                    if (raw.isNullOrEmpty()) "Lo-Fi Beats" else raw
+                } else null
+
+                val finalSoundName = if (isYouTube) {
+                    ytQuery ?: "YouTube Music"
+                } else {
+                    chosenName
+                }
+
                 val newTimer = TimerModel(
                     id = UUID.randomUUID().toString(),
                     name = finalName,
                     totalDurationMs = totalMs,
                     remainingMs = totalMs,
-                    soundUri = chosenUri?.toString(),
-                    soundName = chosenName
+                    soundUri = if (!isYouTube) chosenUri?.toString() else null,
+                    soundName = finalSoundName,
+                    isYouTubeMusic = isYouTube,
+                    youTubeQuery = ytQuery
                 )
 
                 repository.saveTimer(newTimer)
                 refreshList()
-                Toast.makeText(this, "Created '$finalName' with sound '$chosenName'", Toast.LENGTH_SHORT).show()
+                val soundMsg = if (isYouTube) "▶️ YouTube Music: $ytQuery" else "🎵 $chosenName"
+                Toast.makeText(this, "Created '$finalName' ($soundMsg)", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel", null)
             .show()

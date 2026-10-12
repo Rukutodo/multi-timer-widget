@@ -43,8 +43,15 @@ class TimerAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(timer: TimerModel) {
+            val context = binding.root.context
             binding.textTimerName.text = timer.name
-            binding.textSoundName.text = "🎵 " + timer.soundName
+            if (timer.isYouTubeMusic) {
+                binding.textSoundName.text = "▶️ YT Music: " + (timer.youTubeQuery ?: timer.soundName)
+                binding.textSoundName.setTextColor(ContextCompat.getColor(context, R.color.yt_red_glow))
+            } else {
+                binding.textSoundName.text = "🎵 " + timer.soundName
+                binding.textSoundName.setTextColor(ContextCompat.getColor(context, R.color.primary))
+            }
 
             val remainingMs = when (timer.state) {
                 TimerState.RUNNING -> (timer.endRealtimeMs - SystemClock.elapsedRealtime()).coerceAtLeast(0L)

@@ -26,6 +26,8 @@ class TimerAlarmReceiver : BroadcastReceiver() {
         const val EXTRA_TIMER_NAME = "extra_timer_name"
         const val EXTRA_SOUND_URI = "extra_sound_uri"
         const val EXTRA_SOUND_NAME = "extra_sound_name"
+        const val EXTRA_IS_YOUTUBE = "extra_is_youtube"
+        const val EXTRA_YOUTUBE_QUERY = "extra_youtube_query"
         private const val CHANNEL_ID = "timer_alarm_channel_v3"
         private const val CHANNEL_NAME = "Timer Alarms"
     }
@@ -34,15 +36,24 @@ class TimerAlarmReceiver : BroadcastReceiver() {
         val timerId = intent.getStringExtra(EXTRA_TIMER_ID) ?: return
         val timerName = intent.getStringExtra(EXTRA_TIMER_NAME) ?: "Timer"
         val soundUriString = intent.getStringExtra(EXTRA_SOUND_URI)
+        val isYouTube = intent.getBooleanExtra(EXTRA_IS_YOUTUBE, false)
+        val youTubeQuery = intent.getStringExtra(EXTRA_YOUTUBE_QUERY)
 
         val repository = TimerRepository.getInstance(context)
         repository.markFinished(timerId)
         repository.notifyWidgets()
 
-        triggerAlert(context, timerName, timerId.hashCode(), soundUriString)
+        triggerAlert(context, timerName, timerId.hashCode(), soundUriString, isYouTube, youTubeQuery)
     }
 
-    private fun triggerAlert(context: Context, timerName: String, notificationId: Int, customSoundUriString: String?) {
+    private fun triggerAlert(
+        context: Context,
+        timerName: String,
+        notificationId: Int,
+        customSoundUriString: String?,
+        isYouTube: Boolean,
+        youTubeQuery: String?
+    ) {
         val notificationManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -79,30 +90,87 @@ class TimerAlarmReceiver : BroadcastReceiver() {
             notificationManager.createNotificationChannel(channel)
         }
 
+        // Prepare YouTube Music Intent if configured
+        var ytIntent: Intent? = null
+        var ytPendingIntent: PendingIntent? = null
+        if (isYouTube) {
+            ytIntent = if (!youTubeQuery.isNullOrBlank() && (youTubeQuery.startsWith("http://") || youTubeQuery.startsWith("https://"))) {
+                Intent(Intent.ACTION_VIEW, android.net.Uri.parse(youTubeQuery)).apply {
+                    setPackage("com.google.android.apps.youtube.music")
+                }
+            } else if (!youTubeQuery.isNullOrBlank()) {
+                val searchUrl = "https://music.youtube.com/search?q=" + android.net.Uri.encode(youTubeQuery)
+                Intent(Intent.ACTION_VIEW, android.net.Uri.parse(searchUrl)).apply {
+                    setPackage("com.google.android.apps.youtube.music")
+                }
+            } else {
+                Intent(Intent.ACTION_VIEW, android.net.Uri.parse("https://music.youtube.com")).apply {
+                    setPackage("com.google.android.apps.youtube.music")
+                }
+            }
+            ytIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+
+            // If YouTube Music app is not found, fallback to browser / regular YouTube
+            if (ytIntent.resolveActivity(context.packageManager) == null) {
+                ytIntent.setPackage(null)
+            }
+
+            ytPendingIntent = PendingIntent.getActivity(
+                context,
+                notificationId + 200,
+                ytIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+        }
+
         // Tap notification to open main app
         val openAppIntent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
-        val pendingIntent = PendingIntent.getActivity(
+        val appPendingIntent = PendingIntent.getActivity(
             context,
             notificationId,
             openAppIntent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-        val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+        val contentIntent = ytPendingIntent ?: appPendingIntent
+        val summaryText = if (isYouTube) {
+            "Playing on YouTube Music: ${youTubeQuery ?: "Music Track"}"
+        } else {
+            "'$timerName' has reached 00:00."
+        }
+
+        val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
-            .setContentTitle("⏰ Timer Finished!")
-            .setContentText("'$timerName' has reached 00:00.")
+            .setContentTitle("⏰ Timer Finished: $timerName")
+            .setContentText(summaryText)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setSound(soundUri)
             .setVibrate(longArrayOf(0, 600, 250, 600, 250, 600))
             .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-            .build()
+            .setContentIntent(contentIntent)
 
-        notificationManager.notify(notificationId, notification)
+        if (ytPendingIntent != null) {
+            notificationBuilder.addAction(
+                android.R.drawable.ic_media_play,
+                "▶️ Open YouTube Music",
+                ytPendingIntent
+            )
+            notificationBuilder.setFullScreenIntent(ytPendingIntent, true)
+        }
+
+        notificationManager.notify(notificationId, notificationBuilder.build())
+
+        // If YouTube Music configured, attempt direct activity launch
+        if (ytIntent != null) {
+            try {
+                context.startActivity(ytIntent)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
         // Direct alarm playback using Ringtone on USAGE_ALARM stream
         try {
