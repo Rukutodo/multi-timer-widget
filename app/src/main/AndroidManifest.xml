@@ -30,7 +30,7 @@
         <!-- Home Screen Widget Provider -->
         <receiver
             android:name=".widget.MultiTimerWidgetProvider"
-            android:label="@string/widget_name"
+            android:label="Multi-Timer (List Widget)"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -38,6 +38,23 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_multi_timer_info" />
+        </receiver>
+
+        <!-- Single Timer Hero Widget Provider -->
+        <receiver
+            android:name=".widget.SingleTimerWidgetProvider"
+            android:label="Timer Card (Hero Widget)"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.multitimer.ACTION_HERO_PLAY_PAUSE" />
+                <action android:name="com.example.multitimer.ACTION_HERO_RESET" />
+                <action android:name="com.example.multitimer.ACTION_HERO_NEXT" />
+                <action android:name="com.example.multitimer.ACTION_HERO_PREV" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_single_timer_info" />
         </receiver>
 
         <!-- Widget ListView RemoteViewsService -->
@@ -49,7 +66,7 @@
         <!-- Widget Click Actions Receiver -->
         <receiver
             android:name=".widget.WidgetActionReceiver"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.example.multitimer.ACTION_PLAY_PAUSE" />
                 <action android:name="com.example.multitimer.ACTION_RESET" />

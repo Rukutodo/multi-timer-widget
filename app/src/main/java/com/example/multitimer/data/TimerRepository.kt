@@ -196,6 +196,17 @@ class TimerRepository private constructor(private val context: Context) {
             putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
         }
         context.sendBroadcast(intent)
+
+        // Also update Single Timer Hero Widgets
+        val heroComponent = ComponentName(context, SingleTimerWidgetProvider::class.java)
+        val heroIds = appWidgetManager.getAppWidgetIds(heroComponent)
+        if (heroIds.isNotEmpty()) {
+            val heroIntent = Intent(context, SingleTimerWidgetProvider::class.java).apply {
+                action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+                putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, heroIds)
+            }
+            context.sendBroadcast(heroIntent)
+        }
     }
 
     private fun scheduleAlarm(timer: TimerModel) {

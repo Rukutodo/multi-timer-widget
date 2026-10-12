@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/hero_widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_card_bg"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Top Header: Title, Sound & Switcher -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hero_timer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Work Sprint"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/hero_sound_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎵 Default Alarm"
+                android:textColor="#38BDF8"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Previous Timer Button -->
+        <ImageButton
+            android:id="@+id/btn_hero_prev"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/btn_action_bg"
+            android:contentDescription="Previous Timer"
+            android:src="@drawable/ic_reset"
+            android:rotation="90"
+            android:layout_marginEnd="6dp" />
+
+        <!-- Next Timer Button -->
+        <ImageButton
+            android:id="@+id/btn_hero_next"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/btn_action_bg"
+            android:contentDescription="Next Timer"
+            android:src="@drawable/ic_reset"
+            android:rotation="270" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#1E293B"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Center: Big Hero Countdown -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Native Chronometer (Battery Saver) -->
+        <Chronometer
+            android:id="@+id/hero_chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#00F0FF"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <!-- Static Text countdown (High-Fi) -->
+        <TextView
+            android:id="@+id/hero_timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25:00"
+            android:textColor="#00F0FF"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/hero_status_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="READY"
+            android:textColor="#94A3B8"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Bottom Controls: Big Actions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <ImageButton
+            android:id="@+id/btn_hero_reset"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/btn_action_bg"
+            android:contentDescription="Reset"
+            android:src="@drawable/ic_reset"
+            android:layout_marginEnd="16dp" />
+
+        <ImageButton
+            android:id="@+id/btn_hero_play_pause"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/btn_action_bg"
+            android:contentDescription="Play or Pause"
+            android:src="@drawable/ic_play" />
+    </LinearLayout>
+
+</LinearLayout>

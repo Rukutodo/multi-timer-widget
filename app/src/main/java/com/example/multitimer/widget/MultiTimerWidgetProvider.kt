@@ -96,6 +96,7 @@ class MultiTimerWidgetProvider : AppWidgetProvider() {
             views.setPendingIntentTemplate(R.id.timer_list_view, itemClickPendingIntent)
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.timer_list_view)
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds)
     }

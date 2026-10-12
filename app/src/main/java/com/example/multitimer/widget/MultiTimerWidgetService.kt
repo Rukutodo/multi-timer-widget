@@ -30,7 +30,12 @@ class MultiTimerRemoteViewsFactory(private val context: Context) :
     }
 
     override fun onDataSetChanged() {
-        timers = repository.getAllTimers()
+        val identityToken = android.os.Binder.clearCallingIdentity()
+        try {
+            timers = repository.getAllTimers()
+        } finally {
+            android.os.Binder.restoreCallingIdentity(identityToken)
+        }
     }
 
     override fun onDestroy() {

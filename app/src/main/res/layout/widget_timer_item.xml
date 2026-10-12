@@ -84,6 +84,8 @@
             android:background="@drawable/btn_action_bg"
             android:contentDescription="Reset"
             android:src="@drawable/ic_reset"
+            android:focusable="false"
+            android:clickable="true"
             android:layout_marginEnd="6dp" />
 
         <!-- Play / Pause Button -->
@@ -93,7 +95,9 @@
             android:layout_height="36dp"
             android:background="@drawable/btn_action_bg"
             android:contentDescription="Start or Pause"
-            android:src="@drawable/ic_play" />
+            android:src="@drawable/ic_play"
+            android:focusable="false"
+            android:clickable="true" />
     </LinearLayout>
 
 </LinearLayout>
