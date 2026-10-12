@@ -72,7 +72,6 @@ class TimerAdapter(
             binding.progressTimer.progress = progress
 
             // Status Badge and Buttons
-            val context = binding.root.context
             when (timer.state) {
                 TimerState.RUNNING -> {
                     binding.badgeStatus.text = "RUNNING"
