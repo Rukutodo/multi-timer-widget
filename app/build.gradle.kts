@@ -15,6 +15,27 @@ android {
         versionName = "1.0"
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("release.keystore")
+            storePassword = "multitimerpass"
+            keyAlias = "multitimer"
+            keyPassword = "multitimerpass"
+            enableV1Signing = true
+            enableV2Signing = true
+        }
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("release")
+        }
+        debug {
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+
     buildFeatures {
         viewBinding = true
     }
