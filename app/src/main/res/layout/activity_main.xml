@@ -14,29 +14,48 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="20dp"
             android:paddingTop="24dp"
             android:paddingEnd="20dp"
             android:paddingBottom="12dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="MULTI-TIMER"
-                android:textColor="@color/primary_neon"
-                android:textSize="12sp"
-                android:letterSpacing="0.15"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="MULTI-TIMER"
+                    android:textColor="@color/primary_neon"
+                    android:textSize="12sp"
+                    android:letterSpacing="0.15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Active Dashboard"
+                    android:textColor="@color/text_main"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_diagnostics"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Active Dashboard"
-                android:textColor="@color/text_main"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+                android:layout_height="38dp"
+                android:text="🛠️ Diagnostics"
+                android:textColor="@color/primary"
+                android:textSize="11sp"
+                app:cornerRadius="19dp"
+                app:strokeColor="@color/surface_card_stroke" />
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

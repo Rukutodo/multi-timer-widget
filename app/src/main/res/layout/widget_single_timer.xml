@@ -41,28 +41,30 @@
         </LinearLayout>
 
         <!-- Previous Timer Button -->
-        <ImageButton
+        <TextView
             android:id="@+id/btn_hero_prev"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@drawable/btn_action_bg"
-            android:contentDescription="Previous Timer"
-            android:src="@drawable/ic_reset"
-            android:rotation="90"
+            android:gravity="center"
+            android:text="◀"
+            android:textColor="#38BDF8"
+            android:textSize="12sp"
             android:layout_marginEnd="6dp" />
 
         <!-- Next Timer Button -->
-        <ImageButton
+        <TextView
             android:id="@+id/btn_hero_next"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:background="@drawable/btn_action_bg"
-            android:contentDescription="Next Timer"
-            android:src="@drawable/ic_reset"
-            android:rotation="270" />
+            android:gravity="center"
+            android:text="▶"
+            android:textColor="#38BDF8"
+            android:textSize="12sp" />
     </LinearLayout>
 
-    <View
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#1E293B"

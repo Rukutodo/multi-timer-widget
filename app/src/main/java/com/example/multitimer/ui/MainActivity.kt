@@ -1,6 +1,9 @@
 package com.example.multitimer.ui
 
 import android.Manifest
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.RingtoneManager
@@ -23,6 +26,7 @@ import com.example.multitimer.data.TimerRepository
 import com.example.multitimer.data.TimerState
 import com.example.multitimer.databinding.ActivityMainBinding
 import com.example.multitimer.databinding.DialogAddTimerBinding
+import com.example.multitimer.util.WidgetDiagnostics
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         setupStrategyControls()
         setupRecyclerView()
         setupFab()
+        setupDiagnostics()
         startUiUpdateLoop()
     }
 
@@ -150,6 +155,32 @@ class MainActivity : AppCompatActivity() {
         binding.fabAddTimer.setOnClickListener {
             showAddTimerDialog()
         }
+    }
+
+    private fun setupDiagnostics() {
+        binding.btnDiagnostics.setOnClickListener {
+            showDiagnosticsDialog()
+        }
+    }
+
+    private fun showDiagnosticsDialog() {
+        val report = WidgetDiagnostics.generateFormattedReport(this)
+        MaterialAlertDialogBuilder(this)
+            .setTitle("🛠️ Widget Diagnostics & Status")
+            .setMessage(report)
+            .setPositiveButton("📋 Copy Report") { _, _ ->
+                val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("Widget Diagnostics", report)
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(this, "Copied diagnostics report to clipboard!", Toast.LENGTH_SHORT).show()
+            }
+            .setNeutralButton("🔄 Force Refresh") { _, _ ->
+                repository.notifyWidgets()
+                Toast.makeText(this, "Broadcasted reload to all home screen widgets!", Toast.LENGTH_SHORT).show()
+                showDiagnosticsDialog()
+            }
+            .setNegativeButton("Close", null)
+            .show()
     }
 
     private fun showAddTimerDialog() {
