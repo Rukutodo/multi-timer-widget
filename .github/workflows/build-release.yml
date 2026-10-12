@@ -1,0 +1,69 @@
+name: Build & Release APK
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build APK and Publish Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Build Debug APK
+        run: |
+          gradle wrapper --gradle-version 8.7
+          chmod +x gradlew
+          ./gradlew assembleDebug --stacktrace
+
+      - name: Prepare APK Asset
+        run: |
+          mkdir -p release_assets
+          cp app/build/outputs/apk/debug/app-debug.apk release_assets/multi-timer-widget-v1.0.0.apk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: multi-timer-widget-apk
+          path: release_assets/multi-timer-widget-v1.0.0.apk
+
+      - name: Create GitHub Release & Attach APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "Multi-Timer Widget ${{ github.ref_name }}"
+          body: |
+            ### 📱 Multi-Timer Widget Release ${{ github.ref_name }}
+
+            A battery-optimized, interactive Android timer widget for your home screen.
+
+            #### 🌟 Highlights
+            - **⚡ Dual Battery Strategies**: 
+              - *Battery Saver*: Native `Chronometer` rendered by SystemUI (0% extra battery drain).
+              - *High-Fi Loop*: Real-time progress bar with live percentage indicators.
+            - **📱 Scrollable Multi-Timer Home Screen Widget**: Control multiple named timers with one-tap Play, Pause, and Reset.
+            - **🔔 Exact Finish Alarms**: Background alarms with vibration, sounds, and heads-up notifications.
+
+            #### 📥 Download & Install
+            Download **`multi-timer-widget-v1.0.0.apk`** below and open it on your Android phone to install!
+          files: release_assets/multi-timer-widget-v1.0.0.apk
+          draft: false
+          prerelease: false

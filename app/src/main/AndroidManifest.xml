@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:label="@string/app_name"
+        android:roundIcon="@android:drawable/ic_lock_idle_alarm"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MultiTimer">
+
+        <!-- Main Screen -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Home Screen Widget Provider -->
+        <receiver
+            android:name=".widget.MultiTimerWidgetProvider"
+            android:label="@string/widget_name"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_multi_timer_info" />
+        </receiver>
+
+        <!-- Widget ListView RemoteViewsService -->
+        <service
+            android:name=".widget.MultiTimerWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+
+        <!-- Widget Click Actions Receiver -->
+        <receiver
+            android:name=".widget.WidgetActionReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.multitimer.ACTION_PLAY_PAUSE" />
+                <action android:name="com.example.multitimer.ACTION_RESET" />
+                <action android:name="com.example.multitimer.ACTION_TOGGLE_STRATEGY" />
+                <action android:name="com.example.multitimer.ACTION_ADD_QUICK" />
+            </intent-filter>
+        </receiver>
+
+        <!-- Alarm Finish Receiver -->
+        <receiver
+            android:name=".service.TimerAlarmReceiver"
+            android:exported="false" />
+
+        <!-- High-Fi Foreground Tick Service -->
+        <service
+            android:name=".service.TimerTickService"
+            android:foregroundServiceType="specialUse"
+            android:exported="false" />
+
+    </application>
+
+</manifest>
